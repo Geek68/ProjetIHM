@@ -1,0 +1,39 @@
+.SignInBody
+{
+    height: 100vh;
+    background: #131313;
+    display: grid;
+    place-content: center;
+}
+.SingInParent
+{
+    background: #282828;
+    position: relative;
+}
+.close
+{
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+.SignIntitre
+{
+    background: linear-gradient(to right,#A7F790,#A7F790,#A7F790,rgb(206, 187, 187),rgb(206, 187, 187));
+    -webkit-background-clip: text;
+    color:transparent;
+    mask-image: linear-gradient(to right,#A7F790,#A7F790,#A7F790,rgb(206, 187, 187),rgb(206, 187, 187));
+}
+
+.btnSingIn
+{
+    background: #35442E;
+    color:#A7F790;
+}
+button
+{
+    transition: 3s;
+}
+button:active
+{
+    transform: scale(0.3);
+}

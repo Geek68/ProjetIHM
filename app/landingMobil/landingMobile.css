@@ -1,0 +1,53 @@
+.bodyHeaderMobile
+{
+    background: #131313;
+    position: relative;
+}
+.image1
+{
+    position: absolute;
+    top:0;left: 0;
+}
+.image2
+{
+    position: absolute;
+   bottom:0;right: 0;
+}
+.header
+{
+    background: #282828;
+   
+}
+.Connect
+{
+    background: #9FF383;
+    color:#131313;
+    box-shadow: 0px 0px 10px #A7F790;
+}
+.colonne div
+{
+    background: #282828;
+}
+.colonne div h2{
+    color: #A0C01A;
+}
+.mois 
+{
+    color: #BFC1BF;
+}
+.HeaderObj
+{
+    color:#A7F790;
+}
+.Condition{
+    background: #35442E;
+    color:#A7F790;
+}
+button
+{
+    transition: 3s;
+}
+button:active
+{
+    transform: scale(0.3);
+}

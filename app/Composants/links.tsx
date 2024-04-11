@@ -41,13 +41,7 @@ export default function Links()
             <Link href="/home/depot">
               <div className={Isclicked("c")} onClick={()=>{HandeActive("c")}}>
                     <FontAwesomeIcon icon={faSackDollar}  className="ICONS" color="white" width={20} height={20}/>
-                    <h1 className="text-xl">Depôt</h1>
-                </div>
-            </Link>
-            <Link href="/home/pret">
-            <div className={Isclicked("d")} onClick={()=>{HandeActive("d")}}>
-                    <FontAwesomeIcon icon={faHandHoldingDollar}  className="ICONS" color="white" width={20} height={20}/>
-                    <h1 className="text-xl">Prêt</h1>
+                    <h1 className="text-xl">Versement</h1>
                 </div>
             </Link>
             <Link href="/home/retrait">
@@ -60,6 +54,12 @@ export default function Links()
             <div className={Isclicked("f")} onClick={()=>{HandeActive("f")}}>
                     <FontAwesomeIcon icon={faMoneyBillTransfer}  className="ICONS" color="white" width={20} height={20}/>
                     <h1 className="text-xl">Virement</h1>
+                </div>
+            </Link>
+            <Link href="/home/pret">
+            <div className={Isclicked("d")} onClick={()=>{HandeActive("d")}}>
+                    <FontAwesomeIcon icon={faHandHoldingDollar}  className="ICONS" color="white" width={20} height={20}/>
+                    <h1 className="text-xl">Prêt</h1>
                 </div>
             </Link>
         </div>

@@ -2,6 +2,8 @@ import React from "react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
 import { Tooltip } from "@nextui-org/react";
+
+///uid changer selon les donées venant du base de donnée 
 export const columns = [
   {name: "NOM", uid: "nom"},
   {name: "PRENOMS", uid: "prenom"},
@@ -11,6 +13,7 @@ export const columns = [
   {name: "MONTANT", uid: "Montant"},
   {name: "ACTION", uid: "action"},
 ];
+///donnnee user venant du base de donnée
 export const users = [
   {
     key: "1",

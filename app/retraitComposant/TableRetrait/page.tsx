@@ -6,47 +6,31 @@ import { DeleteIcon } from "../../Composants/DeleteIcon";
 import { users,columns } from "./dataretrait";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
+import ModifcationRetrait from "../Modal/Modification";
+import DeleteRetrait from "../Modal/delete";
 type User = typeof users[0];
 
 export default function TableRetrait() {
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
-      case "nom":
+      case "numeroCompte":
         return (
           <p>{cellValue}</p>
         );
-      case "prenom":
+      case "montantRetrait":
         return (
             <p>{cellValue}</p>
         );
-      case "adresse":
+      case "dataRetrait":
         return (
             <p>{cellValue}</p>
         );
-      case "téléphone":
-        return (
-            <p>{cellValue}</p>
-        );
-     case "Montant":
-        return (
-            <p>{cellValue}</p>
-        );
-      
       case "action":
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip color="primary" content="Modifier l'info">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Supprumer ce client">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
+            <ModifcationRetrait/>
+           <DeleteRetrait/>
           </div>
         );
       default:

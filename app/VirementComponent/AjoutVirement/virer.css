@@ -1,0 +1,8 @@
+button
+{
+    transition: 3s;
+}
+button:active
+{
+    transform: scale(0.3);
+}

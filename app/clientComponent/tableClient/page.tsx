@@ -6,7 +6,8 @@ import { DeleteIcon } from "../../Composants/DeleteIcon";
 import { users,columns } from "./dataClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
+import ModifcationClient from "../Modal/Modification";
+import DeleteClient from "../Modal/delete";
 type User = typeof users[0];
 
 export default function TableClient() {
@@ -36,17 +37,9 @@ export default function TableClient() {
       
       case "action":
         return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip color="primary" content="Modifier l'info">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Supprumer ce client">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
+          <div className="relative flex flex-row ">
+            <ModifcationClient/>
+            <DeleteClient/>
           </div>
         );
       default:
@@ -55,7 +48,7 @@ export default function TableClient() {
   }, []);
 
   const [page, setPage] = React.useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 3;
 
   const pages = Math.ceil(users.length / rowsPerPage);
 

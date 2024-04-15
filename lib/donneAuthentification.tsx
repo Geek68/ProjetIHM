@@ -7,7 +7,7 @@ const Inscr = z.object({
     tel: z.string().nonempty().min(10).max(10),
     email:z.string().email().nonempty(),
     password:z.string().min(8),
-    repassword:z.string().nonempty().min(8)
+    dateNaissance:z.coerce.date() ///Modifier en format jj-mm-aaaa
 })
 export async function Inscription (formData:object)
 {
@@ -21,8 +21,8 @@ export async function Inscription (formData:object)
             tel: formData.tel,
             email: formData.email,
             password: formData.password,
-            repassword: formData.repassword,
-           
+            dateNaissance: formData.dateNaissance,
+        
         })
         //création avec retour erreur ou succes
 
@@ -70,7 +70,7 @@ export async function Inscription (formData:object)
         {
             const reponse={
                 reussie: true,
-                mess: ClientData.data.nom+ ClientData.data.tel+ ClientData.data.repassword
+                mess: ClientData.data.dateNaissance+ClientData.data.tel
             }
           return(reponse)
         }

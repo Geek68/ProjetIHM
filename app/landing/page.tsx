@@ -2,7 +2,7 @@ import Image from "next/image"
 import img1 from '@/Images/image1.png'
 import img2 from '@/Images/image2.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBank,faClose } from '@fortawesome/free-solid-svg-icons';
+import { faBank,faMoneyBillWave,faSackDollar} from '@fortawesome/free-solid-svg-icons';
 import './page.css'
 import { poppins,pia } from "../fonts";
 import { Link } from "@nextui-org/react";
@@ -10,7 +10,7 @@ export default function Landing()
 {
     return(
         <div className="bodyHeader">
-            <Image src={img1} alt="img"  className="image1" width={300} height={250}/>
+             <FontAwesomeIcon icon={faMoneyBillWave} className="image1" color="#48773B" width={150} height={150}/>
             <div className={`${poppins.className} ParentHeader w-5/5`}>
                 <div className="flex flex-col items-center gap-12">
                     <header className="w-4/5 header flex flex-row justify-between gap-10 px-7 py-3 rounded-full">
@@ -60,7 +60,7 @@ export default function Landing()
                     </div>
                 </div>
             </div>
-            <Image src={img2} alt="img" className="image2" width={300} height={300}/>
+            <FontAwesomeIcon icon={faSackDollar} className="image2" color="#48773B" width={150} height={150}/>
         </div>
         )
 }

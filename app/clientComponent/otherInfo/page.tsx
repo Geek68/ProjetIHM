@@ -1,8 +1,14 @@
+"use client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSackDollar,faHandHoldingDollar,faMoneyBillTransfer,faMoneyCheckDollar,faCalendar,faClock} from '@fortawesome/free-solid-svg-icons';
 import './otehrInfo.css'
+import { date } from "@/app/Composants/Times";
+import GetHours from "@/app/Composants/Times";
 export default function OtherInfo()
 {
+   
+    
+    var hours= GetHours()
     return(<>
         <div className="flex flex-col gap-5 w-2/3">
            <div className="flex flex-row  w-5/5 justify-between">
@@ -30,11 +36,11 @@ export default function OtherInfo()
                     <div className="titelIcon flex flex-row gap-10 items-center">
                         <div className="titleH1 flex flex-col gap-2">
                             <h1 className="text-2xl" style={{ color:"#A7F790" }}>Aujourd'hui</h1>
-                            <h3 className="text-xl">C'est le</h3>
+                            <h3 className="text-xl">le {date}</h3>
                         </div>
                         <FontAwesomeIcon className="p-2 rounded-full icon" icon={faCalendar}  color="#A7F790" width={50} height={50}/>
                     </div>
-                    <p className="text-gray-500">Mardi 23 Mars 2024</p>
+                    <p className="text-gray-500">La date actuelle</p>
                 </div>
            </div>
            <div className="flex flex-row justify-between">
@@ -62,7 +68,7 @@ export default function OtherInfo()
                         <div className="titelIcon flex flex-row gap-10 items-center">
                             <div className="titleH1 flex flex-col gap-2">
                                 <h1 className="text-2xl" style={{ color:"#A7F790" }}>Heure Actuel</h1>
-                                <h3 className="text-xl">il est </h3>
+                                <h3 className="text-xl">{hours}</h3>
                             </div>
                             <FontAwesomeIcon className="p-2 rounded-full icon" icon={faClock}  color="#A7F790" width={50} height={50}/>
                         </div>

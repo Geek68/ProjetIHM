@@ -5,62 +5,67 @@ import { NumComptes } from "@/app/Composants/dataDonnee";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './depot.css'
+import { VerserDepot } from "@/lib/donneeVersement";
 export default function Verser()
 {
     const [next, setnext] = useState(0);
 
     const [formData, setFormData] = useState({
-        nom: "",
-        prenom: "",
-        adresse: "",
-        tel: "",
-        email: "",
-        montant: "",
+        numeroCompte:"",
+        montantVersement: "",
+        dateVersement:null,
+        nomVerseur:"",
+        prenomsVerseur:"",
+        telVerseur:"",
       });
       // Current step (0 or 1)
 
       const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
       };
+      console.log(formData)
 
-    //   let reponse;
-    //   async function Error ()
-    //   {
-    //     reponse =  await AjouterClient(formData)
+      let reponse;
+      async function Error ()
+      {
+        reponse =  await VerserDepot(formData)
         
-    //   }
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //    try{
-    //         Error().then(()=>{
-    //             {
-    //               if(reponse.reussie ===false)
-    //               {
-    //                 reponse.mess.map(err=>{
-    //                     toast.error(err)
-    //                 });
+      }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+       try{
+            Error().then(()=>{
+                {
+                  if(reponse.reussie ===false)
+                  {
+                    reponse.mess.map(err=>{
+                        toast.error(err)
+                    });
                     
-    //               }
-    //               else
-    //               {
-    //                   toast.success(reponse.mess)
-    //               }
-    //             }
+                  }
+                  else
+                  {
+                      toast.success(reponse.mess)
+                  }
+                }
                
-    //         })
-    //    }
-    //    catch(error){
-    //        console.log(error)
-    //    }
-    // };
+            })
+       }
+       catch(error){
+           console.log(error)
+       }
+    };
     return(<>
     <div className="AjoutClient flex justify-center items-center w-1/4 rounded-xl p-3 "  style={{ background:"#282828"}}>
        <div className="flex flex-col gap-6">
             <h1 className="text-center text-2xl text-green-400">Verser</h1>
-            <form className="flex flex-col gap-8 w-[250px]">
+            <form className="flex flex-col gap-8 w-[250px]" onSubmit={handleSubmit}>
                 <div className={`${next === 0 ?"block":"hidden"} part1 flex flex-col gap-3`}>
                     <Select
                     items={NumComptes}
+                    value={formData.numeroCompte}
+                    onChange={handleChange}
+                    name="numeroCompte"
                     label="Compte à Verser"
                     placeholder="Choisir le compte"
                     labelPlacement="outside"
@@ -75,13 +80,13 @@ export default function Verser()
                             )
                         }
                     </Select>
-                    <Input size="md" value={formData.prenom} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à verser*</label>} name="prenom"/>
-                    <Input size="md" value={formData.adresse} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="adresse"/>
+                    <Input size="md" value={formData.montantVersement} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à verser*</label>} name="montantVersement"/>
+                    <Input size="md" value={formData.dateVersement} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="dateVersement"/>
                 </div>
                 <div className={`${next === 1 ?"block":"hidden"} part2  flex flex-col gap-3`}>
-                    <Input size="md" value={formData.tel} onChange={handleChange}style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom  du Verseur*</label>} name="tel"/>
-                    <Input size="md" value={formData.tel} onChange={handleChange}style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prenoms  du Verseur*</label>} name="tel"/>
-                    <Input size="md" value={formData.email} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Tel du Vesreur*</label>} name="email"/>
+                    <Input size="md" value={formData.nomVerseur} onChange={handleChange}style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom  du Verseur*</label>} name="nomVerseur"/>
+                    <Input size="md" value={formData.prenomsVerseur} onChange={handleChange}style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prenoms  du Verseur*</label>} name="prenomsVerseur"/>
+                    <Input size="md" value={formData.telVerseur} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Tel du Vesreur*</label>} name="telVerseur"/>
                 </div>
                 <div className='SignupBtn flex flex-wrap gap-2 mt-2'>
                     <button

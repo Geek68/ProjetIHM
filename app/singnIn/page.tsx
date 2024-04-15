@@ -23,7 +23,7 @@ export default function SingIn()
         tel: "",
         email:"",
         password: "",
-        repassword: "",
+        dateNaissance: null,
       });
       const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -70,7 +70,8 @@ export default function SingIn()
                     <Input size="md" name="nom" value={formData.nom} onChange={handleChange} style={{ color: "#FFFFFF" }}  className="Input"  variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom*</label>}/>
                     <Input size="md" name="prenom" value={formData.prenom} onChange={handleChange} style={{ color: "#FFFFFF" }}  className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prénoms*</label>}/>
                     <Input size="md" name="tel" value={formData.tel} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input"  variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Téléphone*</label>}/>
-                    <Input size="md"name="email" value={formData.email} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email*</label>}/>
+                    <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email*</label>}/>
+                    <Input size="md" name="datNaissance" value={formData.dateNaissance} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date de Naissance*</label>}/>
                     <Input
                     name="password"
                     value={formData.password} 
@@ -89,25 +90,6 @@ export default function SingIn()
                                 </button>
                             }
                         type={isVisible ? "text" : "password"}
-                        />
-                    <Input
-                        name="repassword"
-                        value={formData.repassword}
-                        onChange={handleChange}
-                        label={<label style={{ color: 'gray' }}>Re-valide le Mot de Passe*</label>}
-                        className="Input"
-                        style={{ color: "#FFFFFF" }}
-                        variant="underlined"
-                        endContent={
-                        <button className="focus:outline-none" type="button" onClick={toggleIsVisibility}>
-                        {Visible ? (
-                        <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                        ) : (
-                        <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                        )}
-                         </button>
-                         }
-                        type={Visible ? "text" : "password"}
                         />
                         <div className="flex flex-col gap-7 items-center">
                             <p className="text-center text-gray-500">Cliquez sûr confirmer pour s'incrire, Avez-vous déjà un compte ? <Link href="/singnUp" className="text-white">Se connecter</Link></p>

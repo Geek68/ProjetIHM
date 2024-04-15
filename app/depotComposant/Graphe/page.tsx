@@ -44,7 +44,7 @@ useEffect(()=>{
             ChartRef.current.chart = newchart
         }
 },[])
-    return(<div className="w-full h-2/5 flex flex-row justify-center" >
+    return(<div className="w-full h-2/6 flex flex-row justify-center" >
         <canvas ref={ChartRef}/>
     </div>)
 }

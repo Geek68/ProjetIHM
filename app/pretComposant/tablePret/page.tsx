@@ -3,52 +3,48 @@ import React from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
-import { users,columns } from "./datadepot";
+import { users,columns } from "./dataPret";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import ModifcationDepôt from "../Modal/Edit";
-import DeleteDepôt from "../Modal/delete";
+import ModifcationPrêt from "../Modal/Edit";
+import DeletePret from "../Modal/Delete";
 type User = typeof users[0];
 
-export default function TableDepot() {
+export default function TablePret() {
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
-      case "numeroCompte":
-        return (
-          <p>{cellValue}</p>
-        );
-      case "montantVersement":
-        return (
+        case "numeroCompte":
+          return (
             <p>{cellValue}</p>
-        );
-      case "dataVersement":
-        return (
-            <p>{cellValue}</p>
-        );
-      case "nomVerseur":
-        return (
-            <p>{cellValue}</p>
-        );
-     case "prenomVerseur":
-        return (
-            <p>{cellValue}</p>
-        );
-     case "TelVerseur":
+          );
+        case "montantPret":
           return (
               <p>{cellValue}</p>
           );
-      
-      case "action":
-        return (
-          <div className="relative flex items-center gap-2">
-            <ModifcationDepôt/>
-            <DeleteDepôt/>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
+        case "tauxPret":
+          return (
+              <p>{cellValue}</p>
+          );
+        case "datePret":
+          return (
+              <p>{cellValue}</p>
+          );
+       case "delaiPret":
+          return (
+              <p>{cellValue}</p>
+          );
+        
+        case "action":
+          return (
+            <div className="relative flex items-center gap-2">
+              <ModifcationPrêt/>
+              <DeletePret/>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
   }, []);
 
   const [page, setPage] = React.useState(1);
@@ -67,7 +63,7 @@ export default function TableDepot() {
   return (
     <div style={{background:"#282828"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
       <div className="flex flex-row justify-between items-center">
-          <h1 style={{color:"#9FF383",fontSize:"20px"}} >Les Versements faits</h1>
+          <h1 style={{color:"#9FF383",fontSize:"20px"}}>Les Prêts en ce moment</h1>
           <Input type="text" className="w-1/4 rounded-full dark" variant="faded"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
@@ -95,7 +91,7 @@ export default function TableDepot() {
       {/* items.key change en items.numero.versement */}
       <TableBody items={items}>
         {(item) => (
-          <TableRow key={item.key}>
+          <TableRow key={item.key} onClick={()=>alert(item.key)}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}

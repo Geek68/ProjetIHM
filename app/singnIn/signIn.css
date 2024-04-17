@@ -1,13 +1,13 @@
 .SignInBody
 {
     height: 100vh;
-    background: #131313;
+    background: #ECEFEF;
     display: grid;
     place-content: center;
 }
 .SingInParent
 {
-    background: #282828;
+    background: #ffffffff;
     position: relative;
 }
 .close
@@ -18,20 +18,12 @@
 }
 .SignIntitre
 {
-    background: linear-gradient(to left,#A7F790,rgb(206, 187, 187),rgb(206, 187, 187),#74f13a);
+    background: linear-gradient(to left,#24D26D,black,#24D26D);
     -webkit-background-clip: text;
     color:transparent;
-    mask-image: linear-gradient(to left,#A7F790,white,gray,#35442E,#74f13a);
+    mask-image: linear-gradient(to left,#24D26D,black,#24D26D);
 }
-.Input
-{
-    color:violet;
-}
-.btnSingIn
-{
-    background: #35442E;
-    color:#A7F790;
-}
+
 button
 {
     transition: 3s;

@@ -1,5 +1,7 @@
 "use server"
 import { z } from 'zod';
+import axios from 'axios';
+import {unstable_noStore as noStore} from 'next/cache'
 ///création de type de donnéé client
 const Client = z.object({
    nom: z.string().nonempty(),
@@ -67,12 +69,22 @@ export async function AjouterClient (formData:object)
             return(reponse)
         }
         else
-        {
-            const reponse={
+        {  
+            var reponse=
+                {
                 reussie: true,
-                mess: ClientData.data.nom+ ClientData.data.tel
-            }
-          return(reponse)
+                mess: "Ajout Reussie"
+                
+                }
+               const res= await axios.post('http://localhost:4000/clients',{
+                nomClient: ClientData.data.nom,
+                prenomsClient: ClientData.data.prenom,
+                addresseClient: ClientData.data.adresse,
+                emailClient:ClientData.data.email,
+                telephoneClient: ClientData.data.tel,
+                montantClient: ClientData.data.montant,
+                })
+                return (reponse)  
         }
          ///récuperation d'erreur
     }
@@ -83,3 +95,9 @@ export async function AjouterClient (formData:object)
   
 }
 
+
+export async function GetClient(){
+    noStore()
+    const reponse = await axios.get<[]>('http://localhost:4000/clients')
+    return (reponse.data)
+}

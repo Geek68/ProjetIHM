@@ -62,7 +62,7 @@ export default function SingUp()
             <div className=" flex flex-col gap-10 items-center p-8">
                     <h1 className="SignIntitre text-3xl"> $ Connexion ...</h1>
                     <form className="flex flex-col gap-8 items-center w-4/5" onSubmit={handleSubmit}>
-                    <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#FFFFFF" }}  className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email</label>}/>
+                    <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#000000" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email</label>}/>
                     <Input
                     name="password"
                     value={formData.password} 
@@ -70,7 +70,7 @@ export default function SingUp()
                        label={<label style={{ color: 'gray' }}>Mot de Passe</label>}
                         variant="underlined"
                         className="Input"
-                        style={{ color: "#FFFFFF" }}
+                        sstyle={{ color: "#000000" }}
                         endContent={
                             <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                             {isVisible ? (
@@ -84,8 +84,8 @@ export default function SingUp()
                         />
 
                         <div className="flex flex-col gap-7 items-center">
-                            <p className="text-center text-gray-500">Cliquez sûr confirmer pour connecter, et si vous-ête un nouveua venu ? <Link href="/singnIn" className="text-white">S' Inscrire</Link></p>
-                            <button className="btnSingIn text-2xl px-10 py-2 rounded-xl">Confirmer</button>
+                            <p className="text-center text-gray-500">Cliquez sûr confirmer pour connecter, et si vous-ête un nouveua venu ? <Link href="/singnIn" style={{color:"#24D26D"}}>S' Inscrire</Link></p>
+                            <button className="text-2xl px-10 py-2 rounded-xl" style={{background:"#24D26D",color:"white"}} >Confirmer</button>
                         </div>
                     </form>
             </div>

@@ -3,14 +3,16 @@ import React from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
-import { users,columns } from "./datadepot";
+import {columns } from "./datadepot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationDepôt from "../Modal/Edit";
 import DeleteDepôt from "../Modal/delete";
-type User = typeof users[0];
+import { DonneeVersement } from "./datadepot";
 
 export default function TableDepot() {
+  const users = DonneeVersement()
+  type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -65,10 +67,10 @@ export default function TableDepot() {
 
 
   return (
-    <div style={{background:"#282828"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
+    <div style={{background:"white"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl h-full">
       <div className="flex flex-row justify-between items-center">
-          <h1 style={{color:"#9FF383",fontSize:"20px"}} >Les Versements faits</h1>
-          <Input type="text" className="w-1/4 rounded-full dark" variant="faded"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <h1 style={{color:"#24D26D",fontSize:"20px"}} >Les Versements faits</h1>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={
@@ -84,7 +86,7 @@ export default function TableDepot() {
               />
               </div>
               }
-            className="dark">
+           >
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "action" ? "center" : "start"}>
@@ -93,9 +95,9 @@ export default function TableDepot() {
         )}
       </TableHeader>
       {/* items.key change en items.numero.versement */}
-      <TableBody items={items}>
+      <TableBody items={items} style={{color:"gray"}}>
         {(item) => (
-          <TableRow key={item.key}>
+          <TableRow key={item.numeroVersement}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}

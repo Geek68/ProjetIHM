@@ -61,10 +61,10 @@ export default function TablePret() {
 
 
   return (
-    <div style={{background:"#282828"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
+    <div style={{background:"white"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
       <div className="flex flex-row justify-between items-center">
-          <h1 style={{color:"#9FF383",fontSize:"20px"}}>Les Prêts en ce moment</h1>
-          <Input type="text" className="w-1/4 rounded-full dark" variant="faded"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <h1 style={{color:"#24D26D",fontSize:"20px"}}>Les Prêts en ce moment</h1>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={
@@ -80,7 +80,7 @@ export default function TablePret() {
               />
               </div>
               }
-            className="dark">
+          >
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "action" ? "center" : "start"}>
@@ -89,7 +89,7 @@ export default function TablePret() {
         )}
       </TableHeader>
       {/* items.key change en items.numero.versement */}
-      <TableBody items={items}>
+      <TableBody items={items}  style={{color:"gray"}}>
         {(item) => (
           <TableRow key={item.key} onClick={()=>alert(item.key)}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

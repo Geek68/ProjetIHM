@@ -20,7 +20,7 @@ export default function LandingMobile()
                         <button className={`${pia.className} Connect rounded-full py-3 px-6 `}>Connexion !</button>
                     </header>
                     <div className="Text text-center">
-                        <h1 className="text-3xl">The Perfect Plan for  Your Needs</h1>
+                        <h1 className="text-3xl" style={{color:"#24D26D"}}>The Perfect Plan for  Your Needs</h1>
                         <p  className="parag text-gray-500">
                             Our transparents picking makes it easy to find a plan that within your<br/>
                             financial constraints

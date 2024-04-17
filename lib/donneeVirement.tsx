@@ -1,10 +1,12 @@
 "use server"
 import { z } from 'zod';
+import axios from 'axios';
+import {unstable_noStore as noStore} from 'next/cache'
 ///création de type de donnéé Virement
 const Virer= z.object({
     NumCompteDestinataire: z.string().nonempty(),
     NumCompteExpeditaire: z.string().nonempty(),
-    dateVersement: z.coerce.date(),
+    dateVirement: z.coerce.date(),
     montantVirement: z.coerce.number().min(10000),
 })
 
@@ -16,7 +18,7 @@ export async function VirerMoney (formData:object)
         const VirerData = Virer.safeParse({
             NumCompteDestinataire: formData.NumCompteDestinataire,
             NumCompteExpeditaire: formData.NumCompteExpeditaire,
-            dateVersement: formData.dateVersement,
+            dateVirement: formData.dateVirement,
             montantVirement: formData.montantVirement,
         })
         //création avec retour erreur ou succes
@@ -57,8 +59,15 @@ export async function VirerMoney (formData:object)
         {
             const reponse={
                 reussie: true,
-                mess: VirerData.data.NumCompteDestinataire + VirerData.data.NumCompteExpeditaire+ VirerData.data.montantVirement
+                mess:"Argent virée avec success"
             }
+            const res = await axios.post('http://localhost:4000/virements',{
+                numeroCompteDestinataire: VirerData.data.NumCompteDestinataire,
+                numeroCompteExpediteur:  VirerData.data.NumCompteExpeditaire,
+                montantVirement:  VirerData.data.montantVirement,
+                dateVirement:  VirerData.data.dateVirement,
+              
+                })
           return(reponse)
         }
          ///récuperation d'erreur
@@ -70,3 +79,8 @@ export async function VirerMoney (formData:object)
   
 }
 
+export async function GetVirement(){
+    noStore()
+    const reponse = await axios.get<[]>('http://localhost:4000/virements')
+    return (reponse.data)
+}

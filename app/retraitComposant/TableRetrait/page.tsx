@@ -3,14 +3,16 @@ import React from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
-import { users,columns } from "./dataretrait";
+import { columns } from "./dataretrait";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationRetrait from "../Modal/Modification";
 import DeleteRetrait from "../Modal/delete";
-type User = typeof users[0];
+import { DonneeRetrait } from "./dataretrait";
 
 export default function TableRetrait() {
+  const users = DonneeRetrait()
+  type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -52,10 +54,10 @@ export default function TableRetrait() {
 
 
   return (
-    <div style={{background:"#282828"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
+    <div style={{background:"white"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
       <div className="flex flex-row justify-between items-center">
-          <h1 style={{color:"#9FF383",fontSize:"20px"}}>Les retraits faits</h1>
-          <Input type="text" className="w-1/4 rounded-full dark" variant="faded"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <h1 style={{color:"#24D26D",fontSize:"20px"}}>Les retraits faits</h1>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={
@@ -71,7 +73,7 @@ export default function TableRetrait() {
               />
               </div>
               }
-            className="dark">
+            >
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "action" ? "center" : "start"}>
@@ -80,9 +82,9 @@ export default function TableRetrait() {
         )}
       </TableHeader>
       {/* items.key change en items.numero.versement */}
-      <TableBody items={items}>
+      <TableBody items={items}  style={{color:"gray"}}>
         {(item) => (
-          <TableRow key={item.key} onClick={()=>alert(item.key)}>
+          <TableRow key={item.numeroRetraits}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}

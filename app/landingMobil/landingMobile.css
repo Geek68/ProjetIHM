@@ -15,21 +15,21 @@
 }
 .header
 {
-    background: #282828;
+    background: white;
    
 }
 .Connect
 {
-    background: #9FF383;
+    background: #24D26D;
     color:#131313;
     box-shadow: 0px 0px 10px #A7F790;
 }
 .colonne div
 {
-    background: #282828;
+    background: rgba(255, 255, 255, 0.932);
 }
 .colonne div h2{
-    color: #A0C01A;
+    color: #24D26D;
 }
 .mois 
 {
@@ -37,7 +37,7 @@
 }
 .HeaderObj
 {
-    color:#A7F790;
+    color:#24D26D;
 }
 .Condition{
     background: #35442E;

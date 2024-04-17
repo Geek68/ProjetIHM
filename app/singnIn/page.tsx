@@ -67,11 +67,11 @@ export default function SingIn()
             <div className=" flex flex-col gap-10 items-center p-8">
                     <h1 className="SignIntitre text-3xl"> $ Formulaire d'Inscription $</h1>
                     <form className="flex flex-col gap-8 items-center w-4/5" onSubmit={handleSubmit}>
-                    <Input size="md" name="nom" value={formData.nom} onChange={handleChange} style={{ color: "#FFFFFF" }}  className="Input"  variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom*</label>}/>
-                    <Input size="md" name="prenom" value={formData.prenom} onChange={handleChange} style={{ color: "#FFFFFF" }}  className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prénoms*</label>}/>
-                    <Input size="md" name="tel" value={formData.tel} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input"  variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Téléphone*</label>}/>
-                    <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email*</label>}/>
-                    <Input size="md" name="datNaissance" value={formData.dateNaissance} onChange={handleChange} style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date de Naissance*</label>}/>
+                    <Input size="md" name="nom" value={formData.nom} onChange={handleChange} style={{ color: "#000000" }}  className="Input"  variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom*</label>}/>
+                    <Input size="md" name="prenom" value={formData.prenom} onChange={handleChange} style={{ color: "#000000" }}  className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prénoms*</label>}/>
+                    <Input size="md" name="tel" value={formData.tel} onChange={handleChange} style={{ color: "#000000" }} className="Input"  variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Téléphone*</label>}/>
+                    <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#000000" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email*</label>}/>
+                    <Input size="md" name="datNaissance" value={formData.dateNaissance} onChange={handleChange}style={{ color: "#000000" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date de Naissance*</label>}/>
                     <Input
                     name="password"
                     value={formData.password} 
@@ -79,7 +79,7 @@ export default function SingIn()
                        label={<label style={{ color: 'gray' }}>Mot de Passe*</label>}
                         variant="underlined"
                         className="Input"
-                        style={{ color: "#FFFFFF" }}
+                        style={{ color: "#000000" }}
                         endContent={
                             <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                             {isVisible ? (
@@ -92,8 +92,8 @@ export default function SingIn()
                         type={isVisible ? "text" : "password"}
                         />
                         <div className="flex flex-col gap-7 items-center">
-                            <p className="text-center text-gray-500">Cliquez sûr confirmer pour s'incrire, Avez-vous déjà un compte ? <Link href="/singnUp" className="text-white">Se connecter</Link></p>
-                            <button className="btnSingIn text-2xl px-10 py-2 rounded-xl">Confirmer</button>
+                            <p className="text-center text-gray-500">Cliquez sûr confirmer pour s'incrire, Avez-vous déjà un compte ? <Link href="/singnUp" style={{color:"#24D26D"}}>Se connecter</Link></p>
+                            <button className="text-2xl px-10 py-2 rounded-xl"  style={{background:"#24D26D",color:"white"}} >Confirmer</button>
                         </div>
                     </form>
             </div>

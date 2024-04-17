@@ -1,12 +1,13 @@
 "use server"
 import { z } from 'zod';
+import axios from 'axios';
 ///création de type de donnéé Virement
 const Pret= z.object({
     numeroCompte: z.string().nonempty(),
     montantPret: z.coerce.number().min(10000),
     tauxPret: z.coerce.number(),
     datePret: z.coerce.date(),
-    delaiPret: z.coerce.date(),
+    delaiPret: z.coerce.number(),
 })
 
 
@@ -58,11 +59,20 @@ export async function PretMoney (formData:object)
         }
         else
         {
-            const reponse={
-                reussie: true,
-                mess: PretData.data.numeroCompte + PretData.data.montantPret+ PretData.data.datePret
+            var reponse=
+            {
+            reussie: true,
+            mess: "Pret fait avec sucees"
+            
             }
-          return(reponse)
+           const res= await axios.post('http://localhost:4000/prets',{
+            numeroCompteEmprunteur: PretData.data.numeroCompte,
+            montantPret: PretData.data.montantPret,
+            tauxPret: PretData.data.tauxPret,
+            datePret: PretData.data.datePret,
+            delaiPret: PretData.data.delaiPret,
+            })
+            return (reponse) 
         }
          ///récuperation d'erreur
     }

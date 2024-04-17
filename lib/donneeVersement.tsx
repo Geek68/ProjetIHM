@@ -1,5 +1,7 @@
 "use server"
 import { z } from 'zod';
+import axios from 'axios';
+import {unstable_noStore as noStore} from 'next/cache'
 ///création de type de donnéé Versement
 const Depot= z.object({
     numeroCompte: z.string().nonempty(),
@@ -7,10 +9,10 @@ const Depot= z.object({
     montantVersement: z.coerce.number().min(10000),
     nomVerseur: z.string().nonempty(),
     prenomsVerseur:z.string().nonempty(),
-    telVerseur: z.string().nonempty().min(10).max(10),
+    // telVerseur: z.string().nonempty().min(10).max(10),
 })
 
-export async function VerserDepot (formData:object)
+export async function VerserDepot(formData:object)
 {
     try
     {
@@ -21,7 +23,7 @@ export async function VerserDepot (formData:object)
             montantVersement: formData.montantVersement,
             nomVerseur: formData.nomVerseur,
             prenomsVerseur: formData.prenomsVerseur,
-            telVerseur: formData.telVerseur,
+            // telVerseur: formData.telVerseur,
         })
         //création avec retour erreur ou succes
 
@@ -70,8 +72,15 @@ export async function VerserDepot (formData:object)
         {
             const reponse={
                 reussie: true,
-                mess: DepotData.data.nomVerseur+ DepotData.data.telVerseur
+                mess:"Versement fait"
             }
+            const res = await axios.post('http://localhost:4000/versements',{
+                numeroCompteVersement: DepotData.data.numeroCompte,
+                montantVersement:  DepotData.data.montantVersement,
+                dateVersement:  DepotData.data.dateVersement,
+                nomVerseur:  DepotData.data.nomVerseur,
+                prenomsVerseur:  DepotData.data.prenomsVerseur,
+                })
           return(reponse)
         }
          ///récuperation d'erreur
@@ -83,3 +92,8 @@ export async function VerserDepot (formData:object)
   
 }
 
+export async function GetVersement(){
+    noStore()
+    const reponse = await axios.get<[]>('http://localhost:4000/versements')
+    return (reponse.data)
+}

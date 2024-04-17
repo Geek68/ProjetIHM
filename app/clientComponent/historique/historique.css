@@ -3,7 +3,7 @@
     overflow: hidden; 
     overflow-y: scroll; 
     max-height: 20rem; 
-    background: #131313;
+    background: #EEEFED;
 }
 .histo::-webkit-scrollbar {
     width: 5px; 
@@ -17,6 +17,6 @@
   }
   
 .histo::-webkit-scrollbar-track {
-    background: #282828;
+    background: white;
     border-radius: 20px;/* couleur de fond de la barre de défilement */
   }

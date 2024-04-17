@@ -1,5 +1,7 @@
 "use server"
 import { z } from 'zod';
+import axios from 'axios';
+import {unstable_noStore as noStore} from 'next/cache'
 ///création de type de donnéé Retrait
 const Retrait= z.object({
     numeroCompte: z.string().nonempty(),
@@ -53,11 +55,18 @@ export async function RetraitArgent (formData:object)
         }
         else
         {
-            const reponse={
+            var reponse=
+                {
                 reussie: true,
-                mess: RetraitData.data.numeroCompte + RetraitData.data.montantRetrait
-            }
-          return(reponse)
+                mess: "Argent Retirée"
+                
+                }
+               const res= await axios.post('http://localhost:4000/retraits',{
+                numeroCompte: RetraitData.data.numeroCompte,
+                dateRetrait: RetraitData.data.dateRetrait,
+                montantRetrait: RetraitData.data.montantRetrait
+                })
+                return (reponse) 
         }
          ///récuperation d'erreur
     }
@@ -68,3 +77,8 @@ export async function RetraitArgent (formData:object)
   
 }
 
+export async function GetRetrait(){
+    noStore()
+    const reponse = await axios.get<[]>('http://localhost:4000/retraits')
+    return (reponse.data)
+}

@@ -8,10 +8,9 @@ export default function Client()
 {
 
     return(<>
-        <div className="flex flex-col gap-4 justify-between h-full">
+        <div className="flex flex-col justify-around h-full">
             <div className="flex flex-row justify-around items-center">
                 <AjoutClient/>
-
                 <OtherInfo/>
             </div>
             <div className="flex flex-row justify-around items-center">

@@ -1,28 +1,28 @@
 .links:hover
 {
-    background: #131313 ;
+    background: #ECEFEF ;
     border-top-left-radius:50px;
     border-bottom-left-radius:50px;
 }
 .links:hover > h1
 {
-    color:#9FF383;
+    color:#00A762;
 }
 .links:hover > .ICONS
 {
-    color:#9FF383;
+    color:#00A762;
 }
 .links1
 {
-    background: #131313 ;
+    background: #ECEFEF ;
     border-top-left-radius:50px;
     border-bottom-left-radius:50px;
 }
 .links1 > h1
 {
-    color:#9FF383;
+    color:#00A762;
 }
 .links1 > .ICONS
 {
-    color:#9FF383;
+    color:#00A762;
 }

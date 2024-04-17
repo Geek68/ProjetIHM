@@ -4,8 +4,8 @@ export default function Home()
     return(<>
         <div className='flex flex-col justify-evenly  h-full'>
             <div className='flex flex-col  gap-10 items-center'>
-                 <h1 className='text-4xl'style={{color:"#9FF383"}}>Bien le Bonjour 👋👋</h1>
-                 <h1 className='text-5xl'>Encore Bienvenu dans MyBank 🤗🤗</h1>
+                 <h1 className='text-4xl'style={{color:"#00A762"}}>Bien le Bonjour 👋👋</h1>
+                 <h1 className='text-5xl text-black'>Encore Bienvenu dans MyBank 🤗🤗</h1>
             </div>
             <div className="colonne flex flex-row  items-center justify-evenly">
                         <div className="colonne1 h-4/5 flex flex-col gap-6 rounded-3xl py-10 px-6">

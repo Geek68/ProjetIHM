@@ -2,10 +2,14 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure,Tooltip,Input,Select,SelectItem} from "@nextui-org/react";
 import { EditIcon } from "@/app/Composants/EditIcon";
-import { NumComptes } from "@/app/Composants/dataDonnee";
-export default function ModifcationVirement() {
+import { EditVirement,RecupIdVirement } from "@/lib/donneeVirement";
+import { DonneeClient } from "@/app/clientComponent/tableClient/dataClient";
+export default function ModifcationVirement({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+  const NumComptes =DonneeClient()
+  const parsedDate = new Date(data.dateVirement)
+  const formatteDate =parsedDate.toISOString().slice(0, 10)
+  console.log(data)
   return (
     <>
       <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
@@ -17,7 +21,6 @@ export default function ModifcationVirement() {
       </Button>
       <Modal 
       backdrop="blur"
-       className="dark"
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
         motionProps={{
@@ -45,6 +48,7 @@ export default function ModifcationVirement() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-xl text-green-400">Changer l'information du Virement</ModalHeader>
+              <form action={EditVirement}>
               <ModalBody className="flex flex-row justify-center" >
                     <div className="flex flex-col gap-4 w-4/5 ">
                     <Select
@@ -52,14 +56,15 @@ export default function ModifcationVirement() {
                     label="Compte Expeditaire"
                     placeholder="Choisir le compte"
                     labelPlacement="outside"
-                    className="dark" 
+                    name="CompteExpeditaire"
+                    defaultSelectedKeys={[data.numeroCompteExpediteur]}
                     >
                     
                         {
                             (numero)=>(
-                                <SelectItem key={numero.num} style={{color:'gray'}} textValue={numero.num}>
-                                    {numero.num} ({numero.nom})
-                                </SelectItem>
+                                  <SelectItem key={numero.numeroCompte} style={{color:'gray'}} textValue={numero.numeroCompte}>
+                                  {numero.nomClient} {numero.prenomsClient}
+                              </SelectItem>
                             )
                         }
                     </Select>
@@ -68,29 +73,31 @@ export default function ModifcationVirement() {
                     label="Compte Destinataire"
                     placeholder="Choisir le compte"
                     labelPlacement="outside"
-                    className="dark" 
+                    name="compteDestinataire"
+                    defaultSelectedKeys={[data.numeroCompteDestinataire]}
                     >
                     
                         {
                             (numero)=>(
-                                <SelectItem key={numero.num} style={{color:'gray'}} textValue={numero.num}>
-                                    {numero.num} ({numero.nom})
-                                </SelectItem>
+                              <SelectItem key={numero.numeroCompte} style={{color:'gray'}} textValue={numero.numeroCompte}>
+                                  {numero.nomClient} {numero.prenomsClient}
+                              </SelectItem>
                             )
                         }
                     </Select>
-                    <Input size="md"  style={{ color: "#FFFFFF" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à Verser*</label>} name="prenom"/>
-                    <Input size="md"  style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="adresse"/>
+                    <Input size="md"  style={{ color: "black" }}  defaultValue={data.montantVirement} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à Verser*</label>} name="montantVir"/>
+                    <Input size="md"  style={{ color: "black" }}  defaultValue={formatteDate} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="dateVir"/>
                     </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" type="submit" onPress={()=>{RecupIdVirement(data.numeroVirement).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>
+              </form>
             </>
           )}
         </ModalContent>

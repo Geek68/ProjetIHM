@@ -21,8 +21,8 @@ useEffect(()=>{
                         {
                             label:"nombre des depôts par mois",
                             data:[12,19,3,5,2,3,6,2,3,4,5,30],
-                            backgroundColor:"#9FF383",
-                            borderColor:"#9FF383",
+                            backgroundColor:"#00A762",
+                            borderColor:"#00A762",
                             borderWidth:1
                         }
                     ]

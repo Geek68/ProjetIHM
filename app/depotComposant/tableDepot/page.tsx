@@ -9,9 +9,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationDepôt from "../Modal/Edit";
 import DeleteDepôt from "../Modal/delete";
 import { DonneeVersement } from "./datadepot";
-
+import moment from "moment";
 export default function TableDepot() {
   const users = DonneeVersement()
+  const DateConversion = (date: Date)=>{
+    const parsedDate = new Date(date)
+    const formatteDate = parsedDate.toISOString().slice(0, 10)
+    return formatteDate
+  }
   type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -24,9 +29,9 @@ export default function TableDepot() {
         return (
             <p>{cellValue}</p>
         );
-      case "dataVersement":
+      case "dateVersement":
         return (
-            <p>{cellValue}</p>
+            <p>{DateConversion(cellValue)}</p>
         );
       case "nomVerseur":
         return (
@@ -35,18 +40,6 @@ export default function TableDepot() {
      case "prenomVerseur":
         return (
             <p>{cellValue}</p>
-        );
-     case "TelVerseur":
-          return (
-              <p>{cellValue}</p>
-          );
-      
-      case "action":
-        return (
-          <div className="relative flex items-center gap-2">
-            <ModifcationDepôt/>
-            <DeleteDepôt/>
-          </div>
         );
       default:
         return cellValue;
@@ -98,7 +91,18 @@ export default function TableDepot() {
       <TableBody items={items} style={{color:"gray"}}>
         {(item) => (
           <TableRow key={item.numeroVersement}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {(columnKey) => <TableCell>
+                      {
+                        columnKey === "action" ? (
+                          <div className="relative flex items-center gap-2">
+                          <ModifcationDepôt data={item}/>
+                          <DeleteDepôt data={item}/>
+                        </div>
+                      )
+                      :
+                      (renderCell(item, columnKey))
+                      }
+              </TableCell>}
           </TableRow>
         )}
       </TableBody>

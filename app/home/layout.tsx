@@ -2,6 +2,8 @@ import Menu from "../Composants/Menu";
  import { Avatar, AvatarIcon, Divider, Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserSlash} from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden" style={{background:"#ECEFEF"}}>
@@ -22,6 +24,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Divider orientation="horizontal" className="light px-10 flex flex-row"/>
         {children}
       </div>
+      <ToastContainer
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+/>
     </div>
   );
 }

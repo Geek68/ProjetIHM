@@ -2,9 +2,9 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure,Tooltip} from "@nextui-org/react";
 import { DeleteIcon } from "@/app/Composants/DeleteIcon";
-export default function DeleteRetrait() {
+import { SuppressionRetrait } from "@/lib/donneeRetrait";
+export default function DeleteRetrait({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
   return (
     <>
       <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
@@ -14,14 +14,15 @@ export default function DeleteRetrait() {
               </span>
             </Tooltip>
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="dark">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-red-700 text-2xl mb-5">Suppression</ModalHeader>
               <ModalBody>
-                <p>
-                  Voulez-vous effacer ce Retrait dans l'enregistrement<br/><br/>
+                <p className="text-black">
+                  Supprumez-vous le retrait <span style={{color:"#242423",fontWeight:"bold"}}>{data.numeroRetraits}</span><br/>
+                  du compte <span style={{color:"#242423",fontWeight:"bold"}}>{data.numeroCompte}</span> ?<br/><br/>
                   NB: il n'y a pas de rétour en arrière si le Retrait est effacé
                 </p>
               </ModalBody>
@@ -29,7 +30,7 @@ export default function DeleteRetrait() {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" onPress={()=>{SuppressionRetrait(data.numeroRetraits),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

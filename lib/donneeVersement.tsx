@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import axios from 'axios';
 import {unstable_noStore as noStore} from 'next/cache'
+import { Console } from 'console';
 ///création de type de donnéé Versement
 const Depot= z.object({
     numeroCompte: z.string().nonempty(),
@@ -97,3 +98,42 @@ export async function GetVersement(){
     const reponse = await axios.get<[]>('http://localhost:4000/versements')
     return (reponse.data)
 }
+
+var uuid=''
+export async function EditVesresment(formData: FormData)  {
+    console.log(uuid)
+    const {numeroCompte,dateVersement,montantVersement,nomVerseur,prenomsVerseur} =Depot.parse({
+        numeroCompte: formData.get('numCompte'),
+        dateVersement: formData.get('dataVers'),
+        montantVersement: formData.get('montantVers'), 
+        nomVerseur: formData.get('nomVers'), 
+        prenomsVerseur: formData.get('prenomsVers'), 
+           
+    })
+        const reponse  = await axios.patch(`http://localhost:4000/versements/${uuid}`,{ 
+        numeroCompteVersement: numeroCompte,
+        dateVersement: dateVersement,
+        montantVersement: montantVersement,
+        nomVerseur: nomVerseur,
+        prenomsVerseur:prenomsVerseur
+       
+   })
+   console.log("Modification successful")
+}
+
+export async function SuppressionVersement(id: string) {
+    try{
+        const reponse  = await axios.delete(`http://localhost:4000/versements/${id}`) 
+        console.log("Suppression successful")
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+}
+
+export async function RecupIdVersement(id: string): Promise<string> 
+    {       
+            uuid = id
+            return id 
+    }

@@ -12,6 +12,11 @@ import { DonneeRetrait } from "./dataretrait";
 
 export default function TableRetrait() {
   const users = DonneeRetrait()
+  const DateConversion = (date: Date)=>{
+    const parsedDate = new Date(date)
+    const formatteDate = parsedDate.toISOString().slice(0, 10)
+    return formatteDate
+  }
   type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -26,14 +31,7 @@ export default function TableRetrait() {
         );
       case "dataRetrait":
         return (
-            <p>{cellValue}</p>
-        );
-      case "action":
-        return (
-          <div className="relative flex items-center gap-2">
-            <ModifcationRetrait/>
-           <DeleteRetrait/>
-          </div>
+           <p>{DateConversion(cellValue)}</p>
         );
       default:
         return cellValue;
@@ -85,7 +83,16 @@ export default function TableRetrait() {
       <TableBody items={items}  style={{color:"gray"}}>
         {(item) => (
           <TableRow key={item.numeroRetraits}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {(columnKey) => <TableCell>{
+                        columnKey === "action" ? (
+                          <div className="relative flex items-center gap-2">
+                          <ModifcationRetrait data={item}/>
+                          <DeleteRetrait data={item}/>
+                        </div>
+                      )
+                      :
+                      (renderCell(item, columnKey))
+                      }</TableCell>}
           </TableRow>
         )}
       </TableBody>

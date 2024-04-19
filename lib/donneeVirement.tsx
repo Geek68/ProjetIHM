@@ -84,3 +84,40 @@ export async function GetVirement(){
     const reponse = await axios.get<[]>('http://localhost:4000/virements')
     return (reponse.data)
 }
+
+var uuid=''
+export async function EditVirement(formData: FormData)  {
+    console.log(uuid)
+    const { NumCompteDestinataire,NumCompteExpeditaire,dateVirement,montantVirement} = Virer.parse({
+        NumCompteDestinataire: formData.get('compteDestinataire'),
+        NumCompteExpeditaire: formData.get('CompteExpeditaire'), 
+        montantVirement: formData.get('montantVir'), 
+        dateVirement: formData.get('dateVir'),
+           
+    })
+        const reponse  = await axios.patch(`http://localhost:4000/virements/${uuid}`,{ 
+            numeroCompteDestinataire: NumCompteDestinataire,
+            numeroCompteExpediteur: NumCompteExpeditaire,
+            montantVirement: montantVirement,
+            dateVirement:  dateVirement,
+       
+   })
+   console.log("Modification successful")
+}
+
+export async function SuppressionVirement(id: string) {
+    try{
+        const reponse  = await axios.delete(`http://localhost:4000/virements/${id}`) 
+        console.log("Suppression successful")
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+}
+
+export async function RecupIdVirement(id: string): Promise<string> 
+    {       
+            uuid = id
+            return id 
+    }

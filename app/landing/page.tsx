@@ -10,7 +10,7 @@ export default function Landing()
 {
     return(
         <div className="bodyHeader">
-             <FontAwesomeIcon icon={faMoneyBillWave} className="image1" color="#24D26D" width={150} height={150}/>
+             {/* <FontAwesomeIcon icon={faMoneyBillWave} className="image1" color="#24D26D" width={150} height={150}/> */}
             <div className={`${poppins.className} ParentHeader w-5/5`}>
                 <div className="flex flex-col items-center gap-12">
                     <header className="w-4/5 header flex flex-row justify-between gap-10 px-7 py-3 rounded-full">
@@ -53,14 +53,15 @@ export default function Landing()
                             </p>
                             <p></p>
                         </div>
+
                     </div>
                     <div className="w-4/5 footer flex flex-row items-center justify-between gap-10 px-7 py-3 rounded-full">
                         <p className="text-xl">Pour les nouveaux créer-un pour faire les Transactions</p>
-                        <Link href="/singnIn"><button className={`${pia.className} Connect rounded-full py-3 px-6 text-xl`}>S'inscrire !</button></Link>
+                        <Link href="/singnIn"><button className={`${pia.className} rounded-full py-3 px-6 text-xl`} style={{background:"white",color:"black"}}>S'inscrire !</button></Link>
                     </div>
                 </div>
             </div>
-            <FontAwesomeIcon icon={faSackDollar} className="image2" color="#24D26D" width={150} height={150}/>
+            {/* <FontAwesomeIcon icon={faSackDollar} className="image2" color="#24D26D" width={150} height={150}/> */}
         </div>
         )
 }

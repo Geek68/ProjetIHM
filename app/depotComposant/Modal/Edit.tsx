@@ -2,10 +2,16 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure,Tooltip,Input,Select,SelectItem} from "@nextui-org/react";
 import { EditIcon } from "@/app/Composants/EditIcon";
-import { NumComptes } from "@/app/Composants/dataDonnee";
-export default function ModifcationDepôt() {
+import { DonneeClient } from "@/app/clientComponent/tableClient/dataClient";
+import { EditVesresment } from "@/lib/donneeVersement";
+import { RecupIdVersement } from "@/lib/donneeVersement";
+import moment from "moment";
+export default function ModifcationDepôt({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+  console.log(data)
+  const NumComptes =DonneeClient()
+  const parsedDate = new Date(data.dateVersement);
+  const formattedDate = parsedDate.toISOString().slice(0, 10);
   return (
     <>
       <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
@@ -17,7 +23,6 @@ export default function ModifcationDepôt() {
       </Button>
       <Modal 
       backdrop="blur"
-       className="dark"
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
         motionProps={{
@@ -45,6 +50,7 @@ export default function ModifcationDepôt() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-xl text-green-400">Changer l'information du depôt</ModalHeader>
+              <form action={EditVesresment}>
               <ModalBody className="flex flex-row justify-center" >
                     <div className="flex flex-col gap-4 w-4/5 ">
                     <Select
@@ -52,32 +58,33 @@ export default function ModifcationDepôt() {
                     label="Compte à Verser"
                     placeholder="Choisir le compte"
                     labelPlacement="outside"
-                    className="dark" 
+                    defaultSelectedKeys={[data.numeroCompteVersement]}
+                    name="numCompte"
                     >
                     
                         {
                             (numero)=>(
-                                <SelectItem key={numero.num} style={{color:'gray'}} textValue={numero.num}>
-                                    {numero.num} ({numero.nom})
-                                </SelectItem>
+                              <SelectItem key={numero.numeroCompte} style={{color:'gray'}} textValue={numero.numeroCompte}>
+                                      {numero.nomClient} {numero.prenomsClient}
+                              </SelectItem>
                             )
                         }
                     </Select>
-                    <Input size="md"  style={{ color: "#FFFFFF" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à verser*</label>} name="prenom"/>
-                    <Input size="md" style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="adresse"/>
-                    <Input size="md" style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom  du Verseur*</label>} name="tel"/>
-                    <Input size="md" style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prenoms  du Verseur*</label>} name="tel"/>
-                    <Input size="md"  style={{ color: "#FFFFFF" }} className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Tel du Vesreur*</label>} name="email"/>
+                    <Input size="md"  style={{ color: "#000000" }} defaultValue={data.montantVersement} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à verser*</label>} name="montantVers"/>
+                    <Input size="md" style={{ color: "#000000" }}  defaultValue={formattedDate} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date*</label>} name="dataVers"/>
+                    <Input size="md" style={{ color: "#000000" }}  defaultValue={data.nomVerseur} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Nom  du Verseur*</label>} name="nomVers"/>
+                    <Input size="md" style={{ color: "#000000" }}  defaultValue={data.prenomsVerseur} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prenoms  du Verseur*</label>} name="prenomsVers"/>
                     </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" type="submit" onPress={()=>{RecupIdVersement(data.numeroVersement).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>
+              </form>
             </>
           )}
         </ModalContent>

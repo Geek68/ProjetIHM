@@ -82,7 +82,7 @@ export default function FairePret()
                 </div>
                 <div className={`${next === 1 ?"block":"hidden"} part2  flex flex-col gap-3`}>
                     <Input size="md" value={formData.datePret} onChange={handleChange} style={{ color: "black" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date du Pret*</label>} name="datePret"/>
-                    <Input size="md" value={formData.delaiPret} onChange={handleChange}style={{ color: "black" }} className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Date du Delais</label>} name="delaiPret"/>
+                    <Input size="md" value={formData.delaiPret} onChange={handleChange}style={{ color: "black" }} className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Date du Delais (en mois)*</label>} name="delaiPret"/>
                 </div>
                 <div className='SignupBtn flex flex-wrap gap-2 mt-2'>
                     <button

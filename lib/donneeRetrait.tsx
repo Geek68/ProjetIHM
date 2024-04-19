@@ -82,3 +82,38 @@ export async function GetRetrait(){
     const reponse = await axios.get<[]>('http://localhost:4000/retraits')
     return (reponse.data)
 }
+
+var uuid=''
+export async function EditRetrait(formData: FormData)  {
+    console.log(uuid)
+    const { numeroCompte,dateRetrait,montantRetrait} = Retrait.parse({
+        numeroCompte: formData.get('numeroCompte'),
+        dateRetrait: formData.get('dateRetrait'), 
+        montantRetrait: formData.get('montantRetrait'),
+           
+    })
+        const reponse  = await axios.patch(`http://localhost:4000/retraits/${uuid}`,{ 
+            numeroCompte: numeroCompte,
+            dateRetrait: dateRetrait,
+            montantRetrait:montantRetrait
+       
+   })
+   console.log("Modification successful")
+}
+
+export async function SuppressionRetrait(id: string) {
+    try{
+        const reponse  = await axios.delete(`http://localhost:4000/retraits/${id}`) 
+        console.log("Suppression successful")
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+}
+
+export async function RecupIdRetrait(id: string): Promise<string> 
+    {       
+            uuid = id
+            return id 
+    }

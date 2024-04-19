@@ -2,7 +2,9 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure,Tooltip} from "@nextui-org/react";
 import { DeleteIcon } from "@/app/Composants/DeleteIcon";
-export default function DeleteClient() {
+import { SuppressionClient } from "@/lib/donneClient";
+import { toast } from "react-toastify";
+export default function DeleteClient({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -14,14 +16,16 @@ export default function DeleteClient() {
               </span>
             </Tooltip>
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="dark">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-red-700 text-2xl mb-5">Suppression</ModalHeader>
               <ModalBody>
-                <p>
-                  Voulez-vous effacer ce client dans l'enregistrement<br/><br/>
+                <p className="text-black">
+                  Voulez-vous effacer <span style={{color:"#242423",fontWeight:"bold"}}>{data.nomClient} {data.prenomsClient}</span> dans <br/>
+                  l'enregistrement des clients
+                  <br/><br/>
                   NB: il n'y a pas de rétour en arrière si le client est effacé
                 </p>
               </ModalBody>
@@ -29,7 +33,7 @@ export default function DeleteClient() {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" onPress={()=>{SuppressionClient(data.numeroCompte),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

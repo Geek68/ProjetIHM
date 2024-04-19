@@ -33,19 +33,11 @@ export default function TableClient() {
         return (
             <p>{cellValue}</p>
         );
-      
-      case "action":
-        return (
-          <div className="relative flex flex-row ">
-            <ModifcationClient/>
-            <DeleteClient/>
-          </div>
-        );
       default:
         return cellValue;
     }
   }, []);
-
+  ///Pagination
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 3;
 
@@ -57,7 +49,12 @@ export default function TableClient() {
 
     return users.slice(start, end);
   }, [page, users]);
+  ///Pagination
 
+
+  ///style de ligne cliquée
+ 
+   ///style de ligne cliquée
 
   return (
     <div className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl h-full" style={{background:"white"}}>
@@ -90,11 +87,20 @@ export default function TableClient() {
       <TableBody items={items} style={{color:"gray"}}>
         {(item) => (
           <TableRow key={item.numeroCompte}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+                    {(columnKey) =>( <TableCell>
+                          {columnKey === "action" ? (
+                            <div className="relative flex flex-row">
+                              <ModifcationClient data={item} />
+                              <DeleteClient data={item} />
+                            </div>
+                          ) : (
+                            renderCell(item, columnKey)
+                          )}
+                  </TableCell>)}
           </TableRow>
         )}
       </TableBody>
     </Table>
     </div>
-  );
+  );  
 }

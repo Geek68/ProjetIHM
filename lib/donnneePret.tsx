@@ -83,3 +83,51 @@ export async function PretMoney (formData:object)
   
 }
 
+export async function GetPret(){
+    const reponse = await axios.get<[]>('http://localhost:4000/prets')
+    return (reponse.data)
+}
+
+var uuid=''
+export async function EditPret(formData: FormData)  {
+    console.log(uuid)
+    const { numeroCompte,montantPret,tauxPret,delaiPret,datePret} = Pret.parse({
+        numeroCompte: formData.get('numCompte'),
+        montantPret: formData.get('montantPret'),
+        tauxPret: formData.get('tauxPret'), 
+        datePret: formData.get('datePret'), 
+        delaiPret: formData.get('delaiPret'), 
+           
+    })
+     console.log(numeroCompte,montantPret,tauxPret,delaiPret,datePret)
+    try{
+        const reponse  = await axios.patch(`http://localhost:4000/prets/${uuid}`,{ 
+            numeroCompteEmprunteur: numeroCompte,
+            montantPret: montantPret,
+            tauxPret: tauxPret,
+            datePret: datePret,
+            delaiPret: delaiPret,})
+     }
+     catch(err){
+         console.log(err)
+     }
+
+   console.log("Modification successful")
+}
+
+export async function SuppressionPret(id: string) {
+    try{
+        const reponse  = await axios.delete(`http://localhost:4000/prets/${id}`) 
+        console.log("Suppression successful")
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+}
+
+export async function RecupIdPret(id: string): Promise<string> 
+    {       
+            uuid = id
+            return id 
+    }

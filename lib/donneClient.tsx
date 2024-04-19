@@ -101,3 +101,46 @@ export async function GetClient(){
     const reponse = await axios.get<[]>('http://localhost:4000/clients')
     return (reponse.data)
 }
+
+var uuid=''
+export async function EditClient(formData: FormData)  {
+    console.log(uuid)
+    const {nom,prenom,adresse,tel,email,montant} =Client.parse({
+            nom: formData.get('nom'),
+            prenom: formData.get('prenom'),
+            adresse: formData.get('adresse'), 
+            tel: formData.get('tel'), 
+            email: formData.get('email'), 
+            montant: formData.get('montant'), 
+    })
+        const reponse  = await axios.patch(`http://localhost:4000/clients/${uuid}`,{ 
+            nomClient: nom,
+        prenomsClient: prenom,
+        addresseClient: adresse,
+        emailClient:email,
+        telephoneClient: tel,
+        montantClient: montant,})
+
+
+        }
+       
+
+
+
+
+export async function SuppressionClient(numeroCompte: string) {
+    console.log(numeroCompte)
+    try{
+        const reponse  = await axios.delete(`http://localhost:4000/clients/${numeroCompte}`) 
+    }
+    catch (e)
+    {
+        console.log(e)
+    }
+}
+
+export async function RecupId(id: string): Promise<string> 
+    {       
+            uuid = id
+            return id 
+    }

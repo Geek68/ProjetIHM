@@ -3,14 +3,21 @@ import React from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
-import { users,columns } from "./dataPret";
+import { columns } from "./dataPret";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationPrêt from "../Modal/Edit";
 import DeletePret from "../Modal/Delete";
-type User = typeof users[0];
-
+import { DonneePret } from "./dataPret";
 export default function TablePret() {
+  const users  = DonneePret()
+  console.log(users)
+  const DateConversion = (date: Date)=>{
+    const parsedDate = new Date(date)
+    const formatteDate = parsedDate.toISOString().slice(0, 10)
+    return formatteDate
+  }
+  type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -24,24 +31,17 @@ export default function TablePret() {
           );
         case "tauxPret":
           return (
-              <p>{cellValue}</p>
+              <p>{cellValue} %</p>
           );
         case "datePret":
           return (
-              <p>{cellValue}</p>
+            <p>{DateConversion(cellValue)}</p>
           );
        case "delaiPret":
           return (
-              <p>{cellValue}</p>
+              <p>{cellValue} mois</p>
           );
         
-        case "action":
-          return (
-            <div className="relative flex items-center gap-2">
-              <ModifcationPrêt/>
-              <DeletePret/>
-            </div>
-          );
         default:
           return cellValue;
       }
@@ -91,8 +91,19 @@ export default function TablePret() {
       {/* items.key change en items.numero.versement */}
       <TableBody items={items}  style={{color:"gray"}}>
         {(item) => (
-          <TableRow key={item.key} onClick={()=>alert(item.key)}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+          <TableRow key={item.numeroPret} >
+            {(columnKey) => <TableCell>
+              {
+                        columnKey === "action" ? (
+                          <div className="relative flex items-center gap-2">
+                          <ModifcationPrêt data={item}/>
+                          <DeletePret data={item}/>
+                        </div>
+                      )
+                      :
+                      (renderCell(item, columnKey))
+                      }
+              </TableCell>}
           </TableRow>
         )}
       </TableBody>

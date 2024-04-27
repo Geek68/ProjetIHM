@@ -47,7 +47,7 @@ export default function TableDepot() {
   }, []);
 
   const [page, setPage] = React.useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 4;
 
   const pages = Math.ceil(users.length / rowsPerPage);
 

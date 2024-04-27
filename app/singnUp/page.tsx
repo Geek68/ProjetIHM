@@ -10,8 +10,10 @@ import Link from "next/link";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Connexion } from "@/lib/donneAuthentification";
+import { useRouter } from 'next/navigation'
 export default function SingUp()
 {
+    const router = useRouter();
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
     const [Visible, setVisible] = React.useState(false);
@@ -25,31 +27,25 @@ export default function SingUp()
         setFormData({ ...formData, [event.target.name]: event.target.value });
       };
 
-      let reponse;
-      async function Error ()
-      {
-        reponse =  await Connexion(formData)
-        
-      }
-    const handleSubmit = (event) => {
+      async function handleSubmit(event) {
         event.preventDefault();
        try{
-            Error().then(()=>{
+            const reponse =  await Connexion(formData)
+            if(reponse!=undefined)
                 {
-                  if(reponse.reussie ===false)
-                  {
-                    reponse.mess.map(err=>{
-                        toast.error(err)
-                    });
-                    
-                  }
-                  else
-                  {
-                      toast.success(reponse.mess)
-                  }
+                    if(!reponse.reussie)
+                        {
+                        reponse.mess.map(err=>{
+                            toast.error(err)
+                        });
+                        }
+                    else{
+                        localStorage.setItem('token',reponse.mess)
+                        router.push("/home")
+                    }
                 }
-               
-            })
+          
+       
        }
        catch(error){
            console.log(error)
@@ -70,7 +66,7 @@ export default function SingUp()
                        label={<label style={{ color: 'gray' }}>Mot de Passe</label>}
                         variant="underlined"
                         className="Input"
-                        sstyle={{ color: "#000000" }}
+                        style={{ color: "#000000" }}
                         endContent={
                             <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                             {isVisible ? (

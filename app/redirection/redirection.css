@@ -1,0 +1,16 @@
+.titre2
+{
+    background: linear-gradient(to left,#24D26D,#6F478E,#24D26D);
+    -webkit-background-clip: text;
+    color: transparent;
+    mask-image: linear-gradient(to left,#24D26D,#6F478E,#24D26D);
+}
+
+button
+{
+    transition: 3s;
+}
+button:active
+{
+    transform: scale(0.3);
+}

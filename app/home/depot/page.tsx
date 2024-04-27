@@ -1,6 +1,7 @@
 import Verser from "@/app/depotComposant/ajoutDepot/page"
 import TableDepot from "@/app/depotComposant/tableDepot/page"
 import Graphe from "@/app/depotComposant/Graphe/page"
+import TimeHous from "@/app/depotComposant/otherInfo/page"
 export default function Depot()
 {
     return (<>
@@ -9,7 +10,10 @@ export default function Depot()
                 <Verser/>
                 <TableDepot/>
             </div>
-            <Graphe/>
+            <div className="flex flex-row justify-evenly">
+                <TimeHous/>
+                <Graphe/>
+            </div>
         </div>
     </>) 
 }

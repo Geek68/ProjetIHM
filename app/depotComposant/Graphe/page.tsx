@@ -29,7 +29,7 @@ useEffect(()=>{
                 },
                 options:
                 {
-                    responsive: true,
+                  
                     scales:{
                         x:{
                             type:"category"
@@ -44,7 +44,7 @@ useEffect(()=>{
             ChartRef.current.chart = newchart
         }
 },[])
-    return(<div className="w-full h-2/6 flex flex-row justify-center" >
-        <canvas ref={ChartRef}/>
+    return(<div className="  w-2/3 h-[20rem] flex flex-row justify-center" >
+        <canvas ref={ChartRef} className=" w-2/3 h-[20rem]"/>
     </div>)
 }

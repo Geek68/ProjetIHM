@@ -1,0 +1,10 @@
+.fondImage
+{
+    background: url("../../../Images/ImageRetrait.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+.fondColor
+{
+    background: rgba(255,255,255,0.8);
+}

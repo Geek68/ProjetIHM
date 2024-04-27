@@ -23,37 +23,29 @@ export default function SingIn()
         tel: "",
         email:"",
         password: "",
-        dateNaissance: null,
+        numeroCaisse:""
+        // dateNaissance: null,
       });
       const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
       };
 
-      let reponse;
-      async function Error ()
-      {
-        reponse =  await Inscription(formData)
-        
-      }
-    const handleSubmit = (event) => {
+
+      async function handleSubmit(event) {
         event.preventDefault();
        try{
-            Error().then(()=>{
+            const reponse =  await Inscription(formData)
+            if(reponse!=undefined)
                 {
-                  if(reponse.reussie ===false)
-                  {
-                    reponse.mess.map(err=>{
-                        toast.error(err)
-                    });
-                    
-                  }
-                  else
-                  {
-                      toast.success(reponse.mess)
-                  }
+                    if(!reponse.reussie)
+                        {
+                        reponse.mess.map(err=>{
+                            toast.error(err)
+                        });
+                        }
                 }
-               
-            })
+          
+       
        }
        catch(error){
            console.log(error)
@@ -71,7 +63,7 @@ export default function SingIn()
                     <Input size="md" name="prenom" value={formData.prenom} onChange={handleChange} style={{ color: "#000000" }}  className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Prénoms*</label>}/>
                     <Input size="md" name="tel" value={formData.tel} onChange={handleChange} style={{ color: "#000000" }} className="Input"  variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Téléphone*</label>}/>
                     <Input size="md" name="email" value={formData.email} onChange={handleChange} style={{ color: "#000000" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>Email*</label>}/>
-                    <Input size="md" name="datNaissance" value={formData.dateNaissance} onChange={handleChange}style={{ color: "#000000" }} className="Input" variant="underlined" type="date" label={<label style={{ color: 'gray' }}>Date de Naissance*</label>}/>
+                    <Input size="md" name="numeroCaisse" value={formData.numeroCaisse} onChange={handleChange}style={{ color: "#000000" }} className="Input" variant="underlined" type="text" label={<label style={{ color: 'gray' }}>N° Caisse*</label>}/>
                     <Input
                     name="password"
                     value={formData.password} 

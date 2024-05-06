@@ -1,9 +1,12 @@
 "use client"
 import { useRef,useEffect } from "react"
 import { Chart } from "chart.js/auto"
+import { DonneeNbrVersement } from "../tableDepot/datadepot"
 export default function Graphe()
 {
     const ChartRef = useRef(null)
+    const data = DonneeNbrVersement()
+    console.log(data)
 
 useEffect(()=>{
     if(ChartRef.current)

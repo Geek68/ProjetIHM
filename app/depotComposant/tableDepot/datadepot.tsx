@@ -1,5 +1,6 @@
 import { useEffect,useState } from "react";
 import { GetVersement } from "@/lib/donneeVersement";
+import { GetNbrVersement } from "@/lib/donneeVersement";
 export const columns = [
     {name: "Compte_Versé", uid: "numeroCompteVersement"},
     {name: "Montant", uid: "montantVersement"},
@@ -13,6 +14,20 @@ export const columns = [
     const [data, setData] = useState([]); // Utiliser useState à l'intérieur du composant
     useEffect(() => {
       GetVersement()
+        .then((res) => {
+          setData(res);
+        })
+        .catch((error) => {
+          console.log("Erreur:", error);
+        });
+    }, []); 
+    return (data);
+  }
+  
+  export function DonneeNbrVersement() {
+    const [data, setData] = useState([]); // Utiliser useState à l'intérieur du composant
+    useEffect(() => {
+      GetNbrVersement()
         .then((res) => {
           setData(res);
         })

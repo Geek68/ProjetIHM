@@ -2,18 +2,23 @@
 {
     overflow: hidden; 
     overflow-y: scroll; 
+    overflow-x: scroll;
     max-height: 20rem; 
+    max-width: 30rem;
     background: #EEEFED;
 }
 .histo::-webkit-scrollbar {
-    width: 5px; 
+    width: 5px;
+    height: 5px; 
     /* largeur de la barre de défilement */
   }
   
 .histo::-webkit-scrollbar-thumb {
     background: gray; /* couleur de la poignée de défilement */
     border-radius: 5px;
-    height: 20px; /* bord arrondi de la poignée de défilement */
+    height: 10px;
+    width: 5px;
+  /* bord arrondi de la poignée de défilement */
   }
   
 .histo::-webkit-scrollbar-track {

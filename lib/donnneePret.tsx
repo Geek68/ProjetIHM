@@ -115,6 +115,42 @@ export async function EditPret(formData: FormData)  {
    console.log("Modification successful")
 }
 
+
+
+const Rembourser = z.object({
+    
+    numeroCompte: z.string().nonempty(),
+    montantAPayer: z.coerce.number(),
+    numeroPret: z.string().nonempty(),
+    numeroBank:z.string().nonempty(),
+
+})
+export async function Rembourse(formData: FormData)  {
+    const { numeroCompte,montantAPayer,numeroPret,numeroBank} = Rembourser.parse({
+        numeroCompte: formData.get('numCompte'),
+        montantAPayer: formData.get('montantPayer'),
+        numeroPret: formData.get('numeroPret'),
+        numeroBank: formData.get('bank')
+           
+    })
+     
+    try{
+        const reponse  = await axios.post('http://localhost:4000/remboursements',{ 
+            numeroCompte: numeroCompte,
+            montantAPayer: montantAPayer,
+            numeroPret: numeroPret,
+            numeroBank:numeroBank
+        })
+            console.log("remboursement Fait")
+     }
+     catch(err){
+         console.log(err)
+     }
+
+   console.log("Modification successful")
+}
+
+
 export async function SuppressionPret(id: string) {
     try{
         const reponse  = await axios.delete(`http://localhost:4000/prets/${id}`) 

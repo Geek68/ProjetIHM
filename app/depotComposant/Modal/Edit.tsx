@@ -8,7 +8,6 @@ import { RecupIdVersement } from "@/lib/donneeVersement";
 import moment from "moment";
 export default function ModifcationDepôt({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  console.log(data)
   const NumComptes =DonneeClient()
   const parsedDate = new Date(data.dateVersement);
   const formattedDate = parsedDate.toISOString().slice(0, 10);

@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useState,useContext } from "react";
 import {EyeFilledIcon} from "../Composants/EyeFilledIcon";
 import {EyeSlashFilledIcon} from "../Composants/EyeSlashFilledIcon";
 import { Input } from "@nextui-org/react"
@@ -10,8 +10,12 @@ import './signIn.css'
 import Link from "next/link";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation'
+import MyContext from "../Composants/MyContext";
 export default function SingIn()
 {
+    const {setUser} = useContext(MyContext)
+    const router = useRouter();
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
     const [Visible, setVisible] = React.useState(false);
@@ -42,6 +46,11 @@ export default function SingIn()
                         reponse.mess.map(err=>{
                             toast.error(err)
                         });
+                        }
+                        else{
+                            localStorage.setItem('token',reponse.mess)
+                            router.push("/home")
+                            setUser(reponse.information)
                         }
                 }
           

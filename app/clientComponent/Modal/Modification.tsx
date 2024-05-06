@@ -7,7 +7,6 @@ import { RecupId } from "@/lib/donneClient";
 import {toast } from 'react-toastify';
 export default function ModifcationClient({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  console.log(data)
   return (
     <>
       <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>

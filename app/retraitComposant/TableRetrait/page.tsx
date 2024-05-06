@@ -9,7 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationRetrait from "../Modal/Modification";
 import DeleteRetrait from "../Modal/delete";
 import { DonneeRetrait } from "./dataretrait";
-
+import axios from "axios";
 export default function TableRetrait() {
   const users = DonneeRetrait()
   const DateConversion = (date: Date)=>{
@@ -50,12 +50,18 @@ export default function TableRetrait() {
     return users.slice(start, end);
   }, [page, users]);
 
-
+  const handleSearch = (e)=>{
+    if(e.target.value !='')
+      {
+        axios.post(`http://localhost:4000/retraits/${e.target.value}`)
+        .then(res=>{console.log(res.data)})
+      }
+  }
   return (
     <div style={{background:"white"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl">
       <div className="flex flex-row justify-between items-center">
           <h1 style={{color:"#24D26D",fontSize:"20px"}}>Les retraits faits</h1>
-          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat" onChange={handleSearch}  placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={

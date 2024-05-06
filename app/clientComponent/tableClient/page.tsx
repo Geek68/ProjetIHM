@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { columns } from "./dataClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,8 +7,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModifcationClient from "../Modal/Modification";
 import DeleteClient from "../Modal/delete";
 import { DonneeClient } from "./dataClient";
+import axios from "axios";
+
 export default function TableClient() {
-  const users = DonneeClient()
+
+const Indata = DonneeClient()
+const [users,setUsers] = useState(Indata)
+
+
   type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -52,15 +58,24 @@ export default function TableClient() {
   ///Pagination
 
 
-  ///style de ligne cliquée
- 
-   ///style de ligne cliquée
+const handleSearch = (e)=>{
+ if(e.target.value != '')
+  {
+    axios.post(`http://localhost:4000/clients/${e.target.value}`)
+    .then(res=>{setUsers(res.data)})
+  }
+  else{
+    setUsers(Indata)
+  }
+}
+
+
 
   return (
     <div className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl h-full" style={{background:"white"}}>
       <div className="flex flex-row justify-between items-center">
           <h1 style={{color:"#24D26D",fontSize:"20px"}} >Clients ayant un compte</h1>
-          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"  onChange={handleSearch} placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={

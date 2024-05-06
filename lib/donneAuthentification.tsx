@@ -80,8 +80,13 @@ export async function Inscription (formData:object)
             numeroCaisse: InscrData.data.numeroCaisse})
             if (res.data)
                 {
-                    console.log(res.data)
-                    redirect("/home") ///redirection vers la page home
+                    const reponse={
+                        reussie: true,
+                        mess: res.data.access_token,
+                        information: res.data.caissier
+                    }
+
+                    return(reponse) ///redirection vers la page home
                 }
     }
   

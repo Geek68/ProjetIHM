@@ -5,15 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserSlash} from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/navigation'
+import MyContext from "../Composants/MyContext";
 import ProtectedRoute from "../Composants/PotectedRoute";
+import Logout from "../Composants/logOut";
+import { useContext } from "react";
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-  const Logout = ()=>
-    {
-        localStorage.removeItem('token');
-        router.push('/singnUp');
-    }
+ const {user} = useContext(MyContext)
+ console.log(user)
   return (
       <ProtectedRoute>
          <div className="flex h-screen flex-col md:flex-row md:overflow-hidden" style={{background:"#ECEFEF"}}>
@@ -24,14 +22,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="flex flex-row gap-5 items-center justify-end"> 
                   <div className="flex flex-row gap-5 items-center">
                     <Avatar icon={<AvatarIcon/>} isBordered color="success" size="sm"/>
-                    <p style={{color:"black"}}>User</p>
+                    <p style={{color:"black"}}>
+                      {
+                        user !== undefined ?   (<span>{user.nomCaissier}</span>):(<span>User</span>) 
+                      }
+                    </p>
                   </div>
                   <Divider orientation="vertical" style={{background:"gray"}} className="light"/>
-                  <Tooltip color="primary" content="Déconnexion">
-                    <span onClick={Logout}>
-                        <FontAwesomeIcon icon={faUserSlash} color="black" width={35} height={35} />
-                    </span>
-                  </Tooltip>
+                  <Logout/>
                 </div>
                 <Divider orientation="horizontal" className="light px-10 flex flex-row"/>
                 {children}

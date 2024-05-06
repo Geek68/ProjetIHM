@@ -137,3 +137,9 @@ export async function RecupIdVersement(id: string): Promise<string>
             uuid = id
             return id 
     }
+
+    export async function GetNbrVersement(){
+        noStore()
+        const reponse = await axios.get<[]>('http://localhost:4000/versements/nombreVersementParMois')
+        return (reponse.data)
+    }

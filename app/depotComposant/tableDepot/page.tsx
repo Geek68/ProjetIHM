@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import {Pagination,Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User,  Tooltip,  Input} from "@nextui-org/react";
 import { EditIcon } from "../../Composants/EditIcon";
 import { DeleteIcon } from "../../Composants/DeleteIcon";
@@ -10,8 +10,10 @@ import ModifcationDepôt from "../Modal/Edit";
 import DeleteDepôt from "../Modal/delete";
 import { DonneeVersement } from "./datadepot";
 import moment from "moment";
+import axios from "axios";
 export default function TableDepot() {
-  const users = DonneeVersement()
+  const Indata= DonneeVersement()
+  const [users,setUsers] =useState(Indata)
   const DateConversion = (date: Date)=>{
     const parsedDate = new Date(date)
     const formatteDate = parsedDate.toISOString().slice(0, 10)
@@ -58,12 +60,21 @@ export default function TableDepot() {
     return users.slice(start, end);
   }, [page, users]);
 
-
+  const handleSearch = (e)=>{
+    if (e.target.value !='')
+      {
+        axios.post(`http://localhost:4000/versements/${e.target.value}`)
+      .then(res=>{setUsers(res.data)})
+      }
+      else{
+         setUsers(Indata)
+      }
+  }
   return (
     <div style={{background:"white"}} className="p-8 flex flex-col gap-6 w-2/3 rounded-3xl h-full">
       <div className="flex flex-row justify-between items-center">
           <h1 style={{color:"#24D26D",fontSize:"20px"}} >Les Versements faits</h1>
-          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"   placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
+          <Input type="text" className="w-1/4 rounded-full text-black" variant="flat"  onChange={handleSearch} placeholder="recherche Client" startContent={<FontAwesomeIcon icon={faSearch}  color="gray"  width={20} height={20}/>}/>
       </div>
       <Table 
           bottomContent={

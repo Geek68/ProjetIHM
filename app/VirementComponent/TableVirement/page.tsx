@@ -8,14 +8,31 @@ import ModifcationVirement from "../Modal/Edit";
 import DeleteVirement from "../Modal/delete";
 import { DonneeVirement } from "./dataVirement";
 import axios from "axios";
+import { useState } from "react";
 export default function TableVirement() {
-  const users = DonneeVirement()
+  const Indata= DonneeVirement()
+  var virement;
+
+  const [vide,setVide] = useState(true)
+  const [result,setResult] = useState([])
+
+  ///condition d'affiche
+if(vide==true)
+  {
+    virement= Indata
+  }
+else
+{
+  virement= result
+}
+///condition d'affiche
+
   const DateConversion = (date: Date)=>{
     const parsedDate = new Date(date)
     const formatteDate = parsedDate.toISOString().slice(0, 10)
     return formatteDate
   }
-  type User = typeof users[0];
+  type User = typeof virement[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -43,20 +60,25 @@ export default function TableVirement() {
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 5;
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const pages = Math.ceil(virement.length / rowsPerPage);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return users.slice(start, end);
-  }, [page, users]);
+    return virement.slice(start, end);
+  }, [page, virement]);
 
   const handleSearch = (e)=>{
    if(e.target.value ! ='')
     {
       axios.post(`http://localhost:4000/virements/${e.target.value}`)
-      .then(res=>{console.log(res.data)})
+      .then(res=>{setResult(res.data)})
+      setVide(false);
+    }
+    else
+    {
+      setVide(true);
     }
   }
   return (

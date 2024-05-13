@@ -9,7 +9,7 @@ export default function DeletePret({data}:{data:object}) {
   return (
     <>
       <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
-      <Tooltip color="danger" content="Supprumer ce client">
+      <Tooltip color="danger" content="Supprumer l'enregistrement">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <DeleteIcon />
               </span>
@@ -31,7 +31,7 @@ export default function DeletePret({data}:{data:object}) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={()=>{SuppressionPret(data.numeroPret),onClose()}}>
+                <Button color="primary" onPress={()=>{SuppressionPret(data.numeroPret).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

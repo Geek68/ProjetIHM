@@ -1,33 +1,45 @@
 "use client"
-import { useRef,useEffect } from "react"
+import { useRef,useEffect, useState } from "react"
 import { Chart } from "chart.js/auto"
+import { GetPret,GetTotalPretNonPaye,GetTotalPretPaye } from "@/lib/donnneePret";
 export default function GraphePret()
-{
+{   
     const ChartRef = useRef(null)
-useEffect(()=>{
-    if(ChartRef.current)
-        {
-            if(ChartRef.current.chart)
-                {
-                    ChartRef.current.chart.destroy()
-                }
-            const context = ChartRef.current.getContext("2d")
-            const newchart  = new Chart(context,{
-                type:"pie",
-                data:{
-                    labels: ['Pret_payé','Pret_Non_payé'],
-                    datasets: [{
-                    label: 'Pourcentage',
-                    data: [300, 150],
-                    backgroundColor: ['#00A762','#37463D'],
-                       
-                      }]
-                },
-                
-            })
-            ChartRef.current.chart = newchart
-        }
-},[])
+    // console.log(Paye,NonPaye)
+    useEffect(()=>{
+            const FetcthData= async ()=>{
+                    const Paye = await  GetTotalPretPaye()
+                    const NonPaye = await  GetTotalPretNonPaye()
+
+                if(ChartRef.current)
+                    {
+                      
+                        if(ChartRef.current.chart)
+                            {
+                                ChartRef.current.chart.destroy()
+                            }
+                        const context = ChartRef.current.getContext("2d")
+                        // console.log(Paye,NonPaye)
+                        const newchart  = new Chart(context,{
+                            type:"pie",
+                            data:{
+                                labels:["Prêt_payé","prêt_NonPayé"],
+                                datasets:[
+                                    {
+                                        label:"Pourcentage des prêts",
+                                        data:[Paye,NonPaye],
+                                        backgroundColor:["#00A762","#37463D"]
+                                    }
+                                ]
+                            },
+                        })
+                        ChartRef.current.chart = newchart
+                    }
+               
+            }
+        FetcthData()
+    },[])
+
     return(<div className="  w-2/3 h-[20rem] flex flex-row justify-center" >
         <canvas ref={ChartRef} className=" w-2/3 h-[20rem]"/>
     </div>)

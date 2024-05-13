@@ -13,7 +13,22 @@ import { useState } from "react";
 import axios from "axios";
 import Remboursement from "../Modal/Remboursement";
 export default function TablePret() {
-  const pret = DonneePret()
+  const Indata= DonneePret()
+  var pret;
+
+  const [vide,setVide] = useState(true)
+  const [result,setResult] = useState([])
+
+  ///condition d'affiche
+if(vide==true)
+  {
+    pret = Indata
+  }
+else
+{
+  pret = result
+}
+///condition d'affiche
   const DateConversion = (date: Date)=>{
     const parsedDate = new Date(date)
     const formatteDate = parsedDate.toISOString().slice(0, 10)
@@ -55,17 +70,18 @@ export default function TablePret() {
     if(e.target.value !='')
       {
         axios.post(`http://localhost:4000/prets/${e.target.value}`)
-        .then(res=>{console.log(res.data)})
+        .then(res=>{setResult(res.data)})
+        setVide(false);
       }
       else
       {
-        
+        setVide(true); 
       }
     }
 
   
   const [page, setPage] = React.useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 4;
 
   const pages = Math.ceil(pret.length / rowsPerPage);
 

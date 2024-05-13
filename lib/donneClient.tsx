@@ -132,6 +132,7 @@ export async function SuppressionClient(numeroCompte: string) {
     console.log(numeroCompte)
     try{
         const reponse  = await axios.delete(`http://localhost:4000/clients/${numeroCompte}`) 
+       
     }
     catch (e)
     {

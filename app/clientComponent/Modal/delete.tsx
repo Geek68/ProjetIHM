@@ -33,7 +33,7 @@ export default function DeleteClient({data}:{data:object}) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={()=>{SuppressionClient(data.numeroCompte),onClose()}}>
+                <Button color="primary" onPress={()=>{SuppressionClient(data.numeroCompte).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

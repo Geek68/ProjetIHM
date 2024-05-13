@@ -39,13 +39,7 @@ export default function FairePret()
                         else
                         {
                             toast.success(reponse.mess)
-                            setFormData({
-                                numeroCompte:"",
-                                montantPret:"",
-                                tauxPret:"",
-                                datePret:null,
-                                delaiPret:"",
-                              });
+                            location.reload();
                         }
                 }
        }
@@ -77,7 +71,7 @@ export default function FairePret()
                             )
                         }
                     </Select>
-                    <Input size="md" value={formData.montantPret} onChange={handleChange} style={{ color: "black" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à verser*</label>} name="montantPret"/>
+                    <Input size="md" value={formData.montantPret} onChange={handleChange} style={{ color: "black" }} className="Input " variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Montant à Prêter*</label>} name="montantPret"/>
                     <Input size="md" value={formData.tauxPret} onChange={handleChange}style={{ color: "black" }}className="Input" variant="underlined" type="number" label={<label style={{ color: 'gray' }}>Taux du pret*</label>} name="tauxPret"/>
                 </div>
                 <div className={`${next === 1 ?"block":"hidden"} part2  flex flex-col gap-3`}>

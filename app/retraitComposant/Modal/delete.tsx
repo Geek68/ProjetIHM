@@ -30,7 +30,7 @@ export default function DeleteRetrait({data}:{data:object}) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={()=>{SuppressionRetrait(data.numeroRetraits),onClose()}}>
+                <Button color="primary" onPress={()=>{SuppressionRetrait(data.numeroRetraits).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

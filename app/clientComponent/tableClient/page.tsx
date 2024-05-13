@@ -12,8 +12,20 @@ import axios from "axios";
 export default function TableClient() {
 
 const Indata = DonneeClient()
-const [users,setUsers] = useState(Indata)
+var users;
+const [vide,setVide] = useState(true)
+const [result,setResult] = useState([])
 
+///condition d'affiche
+if(vide==true)
+  {
+    users = Indata
+  }
+else
+{
+  users= result
+}
+///condition d'affiche
 
   type User = typeof users[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
@@ -61,11 +73,13 @@ const [users,setUsers] = useState(Indata)
 const handleSearch = (e)=>{
  if(e.target.value != '')
   {
+    
     axios.post(`http://localhost:4000/clients/${e.target.value}`)
-    .then(res=>{setUsers(res.data)})
+    .then(res=>{setResult(res.data)})
+    setVide(false)
   }
   else{
-    setUsers(Indata)
+    setVide(true)
   }
 }
 

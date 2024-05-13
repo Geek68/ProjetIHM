@@ -39,14 +39,7 @@ export default function AjoutClient()
                         else
                         {
                             toast.success(reponse.mess)
-                            setFormData({
-                                nom: "",
-                                prenom: "",
-                                adresse: "",
-                                tel: "",
-                                email: "",
-                                montant: "",
-                              });
+                            location.reload();
                         }
                 }
           

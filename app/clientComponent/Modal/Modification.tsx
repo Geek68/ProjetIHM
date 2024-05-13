@@ -9,9 +9,9 @@ export default function ModifcationClient({data}:{data:object}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   return (
     <>
-      <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
+      <Button onPress={onOpen} className="text-lg text-default-400 cursor-pointer active:opacity-50" size="sm" isIconOnly={true} style={{background:"none"}}>
       <Tooltip color="primary" content="Modifier l'info">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <span >
                 <EditIcon />
               </span>
         </Tooltip>

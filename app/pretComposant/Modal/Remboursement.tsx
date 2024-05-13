@@ -10,11 +10,9 @@ export default function Remboursement({data}:{data:object}) {
   const NumComptes =DonneeClient()
   return (
     <>
-      <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
+      <Button onPress={onOpen} size="sm" className="text-lg text-default-400 cursor-ointer" isIconOnly={true} style={{background:"none"}}>
       <Tooltip color="primary" content="Remboursement">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-              <FontAwesomeIcon icon={faHandHoldingDollar}  className="ICONS" color="gray" width={20} height={20}/>
-              </span>
+            <FontAwesomeIcon icon={faHandHoldingDollar}  className="ICONS" color="gray" width={20} height={20}/>
         </Tooltip>
       </Button>
       <Modal 
@@ -74,7 +72,7 @@ export default function Remboursement({data}:{data:object}) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" type="submit" onPress={()=>{location.reload(),onClose()}} >
+                <Button color="primary" type="submit" onPress={onClose} >
                   Oui
                 </Button>
               </ModalFooter>

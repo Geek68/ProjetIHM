@@ -7,7 +7,7 @@ import TimeHous from "@/app/retraitComposant/otherInfo/page"
 export default function Retrait()
 {
     return ( <div className="h-full flex flex-col justify-evenly">
-     <div className="flex flex-row justify-evenly border">
+     <div className="flex flex-row justify-evenly">
         <FaireRetrait/>
          <TableRetrait/>
      </div>

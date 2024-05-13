@@ -15,9 +15,7 @@ export default function Logout() {
       <>
         <Button onPress={onOpen} size="sm" isIconOnly={true} style={{background:"none"}}>
         <Tooltip color="primary" content="Déconnexion">
-            <span >
-                <FontAwesomeIcon icon={faUserSlash} color="black" width={35} height={35} />
-            </span>
+              <FontAwesomeIcon icon={faUserSlash} color="black" width={35} height={35} />
         </Tooltip>
         </Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

@@ -37,11 +37,7 @@ export default function FaireRetrait()
                         else
                         {
                             toast.success(reponse.mess)
-                            setFormData({
-                                numeroCompte:"",
-                                montantRetrait:"",
-                                dateRetrait:null,
-                              });
+                            location.reload();
                         }
                 }
           

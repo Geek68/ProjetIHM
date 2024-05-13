@@ -7,6 +7,7 @@ import './historique.css'
 export default function Historique()
 {
     const historique = DonneHistorique()
+    console.log(historique)
     return(
         <div className="h-full w-1/4 px-5 py-3 rounded-3xl flex flex-col gap-10" style={{ background:"#FFFFFF"}}>
             <div className="flex flex-row justify-between">

@@ -136,10 +136,10 @@ export async function Rembourse(formData: FormData)  {
      
     try{
         const reponse  = await axios.post('http://localhost:4000/remboursements',{ 
-            numeroCompte: numeroCompte,
+            numeroCompteVerseur: numeroCompte,
             montantAPayer: montantAPayer,
-            numeroPret: numeroPret,
-            numeroBank:numeroBank
+            numeroPretPourLeRemboursement: numeroPret,
+            numeroCompteDeLaBanque:numeroBank
         })
             console.log("remboursement Fait")
      }
@@ -167,3 +167,13 @@ export async function RecupIdPret(id: string): Promise<string>
             uuid = id
             return id 
     }
+export async function GetTotalPretPaye(){
+        const reponse = await axios.get('http://localhost:4000/prets/nombreTotalPretPaye')
+        return (reponse.data)
+    }
+
+export async function GetTotalPretNonPaye(){
+        const reponse = await axios.get('http://localhost:4000/prets/nombreTotalPretNonPaye')
+        return (reponse.data)
+    }
+    

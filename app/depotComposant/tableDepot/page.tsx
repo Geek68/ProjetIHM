@@ -13,13 +13,26 @@ import moment from "moment";
 import axios from "axios";
 export default function TableDepot() {
   const Indata= DonneeVersement()
-  const [users,setUsers] =useState(Indata)
+  var depot;
+  const [vide,setVide] = useState(true)
+const [result,setResult] = useState([])
+  ///condition d'affiche
+if(vide==true)
+  {
+    depot = Indata
+  }
+else
+{
+  depot = result
+  console.log(result)
+}
+///condition d'affiche
   const DateConversion = (date: Date)=>{
     const parsedDate = new Date(date)
     const formatteDate = parsedDate.toISOString().slice(0, 10)
     return formatteDate
   }
-  type User = typeof users[0];
+  type User = typeof depot[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -51,23 +64,24 @@ export default function TableDepot() {
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 4;
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const pages = Math.ceil(depot.length / rowsPerPage);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return users.slice(start, end);
-  }, [page, users]);
+    return depot.slice(start, end);
+  }, [page, depot]);
 
   const handleSearch = (e)=>{
     if (e.target.value !='')
       {
         axios.post(`http://localhost:4000/versements/${e.target.value}`)
-      .then(res=>{setUsers(res.data)})
+      .then(res=>{setResult(res.data)})
+      setVide(false)
       }
       else{
-         setUsers(Indata)
+         setVide(true)
       }
   }
   return (

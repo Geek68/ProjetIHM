@@ -9,7 +9,7 @@ import { VerserDepot } from "@/lib/donneeVersement";
 export default function Verser()
 {   const NumComptes =DonneeClient()
     const [next, setnext] = useState(0);
-
+    const [Actu,setActu] = useState(false);
     const [formData, setFormData] = useState({
         numeroCompte:"",
         montantVersement: "",
@@ -19,12 +19,12 @@ export default function Verser()
         // telVerseur:"",
       });
       // Current step (0 or 1)
+    
 
       const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
       };
-      console.log(formData)
-
+     
       
       async function handleSubmit(event) {
         event.preventDefault();
@@ -40,15 +40,10 @@ export default function Verser()
                         }
                         else
                         {
+                           
                             toast.success(reponse.mess)
-                            setFormData({
-                                numeroCompte:"",
-                                montantVersement: "",
-                                dateVersement:null,
-                                nomVerseur:"",
-                                prenomsVerseur:"",
-                                // telVerseur:"",
-                              });
+                            location.reload();
+                            
                         }
                 }
        }

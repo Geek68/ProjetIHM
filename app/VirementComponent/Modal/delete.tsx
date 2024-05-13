@@ -31,7 +31,7 @@ export default function DeleteVirement({data}:{data:object}) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Non
                 </Button>
-                <Button color="primary" onPress={()=>{SuppressionVirement(data.numeroVirement),onClose()}}>
+                <Button color="primary" onPress={()=>{SuppressionVirement(data.numeroVirement).then(()=>{location.reload()}),onClose()}}>
                   Oui
                 </Button>
               </ModalFooter>

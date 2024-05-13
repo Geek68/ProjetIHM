@@ -10,14 +10,30 @@ import ModifcationRetrait from "../Modal/Modification";
 import DeleteRetrait from "../Modal/delete";
 import { DonneeRetrait } from "./dataretrait";
 import axios from "axios";
+import { useState } from "react";
 export default function TableRetrait() {
-  const users = DonneeRetrait()
+  const Indata= DonneeRetrait()
+  var retrait;
+
+  const [vide,setVide] = useState(true)
+  const [result,setResult] = useState([])
+
+  ///condition d'affiche
+if(vide==true)
+  {
+    retrait= Indata
+  }
+else
+{
+  retrait = result
+}
+///condition d'affiche
   const DateConversion = (date: Date)=>{
     const parsedDate = new Date(date)
     const formatteDate = parsedDate.toISOString().slice(0, 10)
     return formatteDate
   }
-  type User = typeof users[0];
+  type User = typeof retrait[0];
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
     switch (columnKey) {
@@ -31,7 +47,7 @@ export default function TableRetrait() {
         );
       case "dataRetrait":
         return (
-           <p>{DateConversion(cellValue)}</p>
+          <p>{DateConversion(cellValue)}</p>
         );
       default:
         return cellValue;
@@ -41,20 +57,25 @@ export default function TableRetrait() {
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 5;
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const pages = Math.ceil(retrait.length / rowsPerPage);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return users.slice(start, end);
-  }, [page, users]);
+    return retrait.slice(start, end);
+  }, [page, retrait]);
 
   const handleSearch = (e)=>{
     if(e.target.value !='')
       {
         axios.post(`http://localhost:4000/retraits/${e.target.value}`)
-        .then(res=>{console.log(res.data)})
+        .then(res=>{setResult(res.data)})
+        setVide(false)
+      }
+      else
+      {
+        setVide(true)
       }
   }
   return (

@@ -14,18 +14,17 @@ export default function Landing()
             <div className={`${poppins.className} ParentHeader w-5/5`}>
                 <div className="flex flex-col items-center gap-12">
                     <header className="w-4/5 header flex flex-row justify-between gap-10 px-7 py-3 rounded-full">
-                        <div className="flex flex-row gap-4 items-center">
-                            <FontAwesomeIcon icon={faBank}  color="#24D26D" width={35} height={35}/>
-                            <h1 style={{color:"black"}}>MyBank</h1>
+                        <div className="flex flex-row gap-2 items-center">
+                            <FontAwesomeIcon icon={faBank}  color="#24D26D" width={65} height={65}/>
+                            <h1 style={{color:"black",fontSize:"20px"}}>MyBank</h1>
                         </div>
                         <Link href="/singnUp"><button className={`${pia.className} Connect rounded-full py-3 px-6 text-xl`}>Connectez-vous !</button></Link>
                     </header>
                     <div className="text-center">
-                        <h1 className="text-5xl" style={{color:"#24D26D"}}>The Perfect Plan for  Your Needs</h1>
+                        <h1 className="text-5xl" style={{color:"#24D26D"}}>Gérez les finances en toute simplicité</h1>
                         <p className="parag text-gray-500">
-                             Our transparents picking makes it easy to find a plan that within your<br/>
-                            financial constraints
-                        </p>
+                        Avec notre application, vous avez les transactions nécéssaires qui les clients ont besoin
+                         </p>
                     </div>
                     <div className="colonne flex flex-row gap-5 items-center justify-around">
                         <div className="colonne1 h-4/5 flex flex-col gap-6 rounded-3xl py-10 px-6">

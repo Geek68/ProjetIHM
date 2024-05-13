@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { GetPret } from "@/lib/donnneePret";
+import { GetPret,GetTotalPretNonPaye,GetTotalPretPaye } from "@/lib/donnneePret";
 export const columns = [
     {name: "Compte", uid: "numeroCompteEmprunteur"},
     {name: "MontantPret", uid: "montantPret"},

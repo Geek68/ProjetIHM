@@ -36,12 +36,7 @@ export default function VirerArgent()
                         else
                         {
                             toast.success(reponse.mess)
-                            setFormData({
-                                NumCompteDestinataire:"",
-                                NumCompteExpeditaire:"",
-                                montantVirement:"",
-                                dateVirement:null,
-                              });
+                            location.reload();
                         }
                 }
        }
